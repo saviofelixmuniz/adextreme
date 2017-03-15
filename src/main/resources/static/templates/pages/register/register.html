@@ -1,0 +1,64 @@
+<div class="center-align" style="margin-top: 30px" id="registerDiv">
+	<h3>Cadastro</h3>
+	<hr>
+	<form id="registerForm" name="registerForm" data-toggle="validator" role="form" class="form-horizontal center-align-full">
+	  
+	  <div class="form-group" ng-class="{'has-error': registerForm.nameForm.$invalid && registerForm.nameForm.$touched}">
+	    <label class="col-xs-4 control-label">Nome</label>
+	    <div class="col-xs-8">
+	      	<input name="nameForm" class="form-control" id="focusedInput" ng-model="user.name" type="text" placeholder="Nome" required>
+			
+			<error-message form="registerForm.nameForm"/>
+	    </div>
+	  </div>
+
+	  <div class="form-group" ng-class="{'has-error': registerForm.mailForm.$invalid && registerForm.mailForm.$touched}">
+	    <label for="inputPassword" class="col-xs-4 control-label">E-mail</label>
+	    <div class="col-xs-8">
+		    <input name="mailForm"  class="form-control" id="disabledInput" ng-model="user.email" type="email" placeholder="Email" data-error="Por favor, informe um e-mail correto." required> 
+
+		    <error-message form="registerForm.mailForm"/>
+	    </div>
+	  </div>
+
+	  <div class="form-group" ng-class="{'has-error': registerForm.passwordForm.$invalid && registerForm.passwordForm.$touched || registerForm.confirmPasswordForm.$error.mismatch}">
+	    <label for="inputPassword" class="col-xs-4 control-label">Senha</label>
+	    <div class="col-xs-8">
+	        <input name="passwordForm"  class="form-control" id="disabledInput" minlength=8 ng-model="user.password" type="password" placeholder="Senha" required>
+
+		    <error-message form="registerForm.passwordForm"/>
+	    </div>
+	  </div>
+
+	  <div class="form-group" ng-class="{'has-error': registerForm.confirmPasswordForm.$invalid && registerForm.confirmPasswordForm.$touched || registerForm.confirmPasswordForm.$error.mismatch}">
+	    <label for="inputPassword" class="col-xs-4 control-label">Confirmar Senha</label>
+	    <div class="col-xs-8">
+	        <input name="confirmPasswordForm"  class="form-control" id="disabledInput" minlength=8 ng-model="confirmPassword" type="password" placeholder="Confirmar Senha" required>
+	    	
+		  	<error-message form="registerForm.confirmPasswordForm"/>
+	    </div>
+	  </div>
+
+	  <div class="form-group" ng-class="{'has-error': registerForm.classForm.$invalid && registerForm.classForm.$touched}">
+	    <label for="inputPassword" class="col-xs-4 control-label">Razão Social</label>
+	    <div class="radio col-xs-8">
+			 <label style="margin-right: 15px">
+				 <input type="radio" name="classForm" ng-model="user.role" value="fisica" >
+				 Pessoa Física
+			 </label>
+
+			 <label>
+				 <input type="radio" ng-model="user.role" value="juridica" >
+				 Pessoa Jurídica
+			 </label>
+				
+			<error-message form="registerForm.classForm"></error-message>
+		</div>
+	  </div>
+
+		<div class="center-align" style="padding-left: 50px; padding-top: 10px">	
+		<button class="btn btn-success" ng-disabled="registerForm.$invalid" ng-click="register(registerForm)">Cadastrar-se</button>
+		<button class="btn btn-danger" ng-click="clear(registerForm)">Limpar</button>
+		</div>
+	</form>
+</div>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>$$ AdExtreme $$</title>
+
+	<!-- STYLESHEETS -->
+	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+	<link rel="stylesheet" href="bower_components/sandstone_theme/bootstrap.css">
+	<link rel="stylesheet" href="bower_components/bootbox.js/style.css">
+	<link rel="stylesheet" href="style/adExtreme/style.css">
+
+	<!-- LIB SCRIPTS IMPORT -->
+	<script src="bower_components/jquery/dist/jquery.js"></script>	
+	<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+	<script src="bower_components/angular/angular.js"></script>
+	<script src="bower_components/angular-route/angular-route.js"></script>
+	<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+	<script src="bower_components/angular-messages/angular-messages.js"></script>
+	<script src="bower_components/bootbox.js/bootbox.js"></script>
+	
+	<!-- SCRIPTS IMPORT -->
+	<script src="src/app.js"></script>
+	<script src="src/router.js"></script>
+	<script src="src/util/message-box.js"></script>
+	<script src="src/util/properties.js"></script>
+	
+	<script src="src/controller/ad/ad-controller.js"></script>
+	<script src="src/controller/ad-register/ad-register-controller.js"></script>
+	<script src="src/controller/home/home-controller.js"></script>
+	<script src="src/controller/login/login-controller.js"></script>
+	<script src="src/controller/register/register-controller.js"></script>
+	<script src="src/interceptor/interceptor.js"></script>
+	<script src="src/controller/user-home/user-home.js"></script>
+
+	<!-- REST IMPORT -->
+	<script src="src/rest/user.js"></script>
+	<script src="src/rest/adversement.js"></script>
+
+	<script src="src/directives/common/nav-bar.js"></script>
+	<script src="src/directives/common/error-message.js"></script>
+
+</head>
+<body ng-app="adExtreme" ng-controller="homeController">
+	<nav-bar logged-in="loggedIn" user="user"></nav-bar>
+	<div ng-view></div>
+
+	<div class="footer">
+		<p>&copy;2017 | Todos os direitos reservados | $ ad-extreme</p>
+	</div>	
+</body>
+
+</html>

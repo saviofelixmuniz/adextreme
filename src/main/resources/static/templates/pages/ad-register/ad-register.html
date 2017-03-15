@@ -1,0 +1,35 @@
+<div class="center-align" style="margin-top: 30px">
+	<h3>Cadastrar Anúncio</h3>
+	<hr>
+	<form id="registerForm" name="form" class="form-horizontal center-align-full">
+	  <div class="form-group" ng-class="{'has-error': form.title.$invalid && form.title.$touched}">
+	    <label class="col-xs-4 control-label">Título</label>
+	    <div class="col-xs-8">
+	        <input class="form-control" name="title" id="focusedInput" ng-model="ad.title" type="text" placeholder="Título do anúncio" required>
+	    	<error-message form="form.title"></error-message>
+	    </div>
+	  </div>
+
+	  <div class="form-group">
+	    <label for="inputPassword" class="col-xs-4 control-label">Preço</label>
+	    <div id="priceAd" class="input-group col-xs-8" style="padding-left: 15px; max-width: ">
+		    <span class="input-group-addon">R$</span>
+	    	<input id="priceInput" name="price" type="number" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" ng-model="ad.price" required>
+	    </div>
+	  </div>
+
+	  <div class="form-group" ng-class="{'has-error': form.class.$invalid && form.class.$touched}">
+	    <label for="inputPassword" class="col-xs-4 control-label">Tipo</label>
+	    <div class="radio col-xs-8">
+		  <label style="margin-right: 15px"><input type="radio" name="class" ng-model="ad.type" value="'movel'" required>Móvel</label>
+		  <label style="margin-right: 15px"><input type="radio" ng-model="ad.type" value="'imovel'">Imóvel</label>
+		  <label><input type="radio" ng-model="ad.type" value="'emprego'">Emprego</label>
+			<error-message form="form.class"></error-message>
+		</div>
+	  </div>
+	</form>
+	<div class="center-align" style="padding-left: 50px; padding-top: 10px">	
+	<button class="btn btn-success" ng-disabled="form.$invalid" ng-click="confirmAd()">Cadastrar</button>
+	<button class="btn btn-danger" ng-click="clear(form)">Limpar</button>
+	</div>
+</div>

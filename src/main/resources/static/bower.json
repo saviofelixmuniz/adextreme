@@ -1,0 +1,17 @@
+{
+  "name": "adextreme",
+  "authors": [
+    "Sávio Muniz <savio.muniz@ccc.ufcg.edu.br>"
+  ],
+  "description": "",
+  "main": "index.html",
+  "license": "MIT",
+  "homepage": "index.html",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

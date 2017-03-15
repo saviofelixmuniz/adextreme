@@ -1,0 +1,58 @@
+.text-icon {
+	display: block;
+}
+
+.footer {
+	position:absolute;
+	bottom:0;
+	width:100%;
+	margin: 0 auto;
+	text-align: center;
+	color: #BDAAAA;
+}
+
+.custom-jumbo {
+	width: 85%;
+	margin: 0 auto;
+}
+
+.centered-panel {
+	width: 50%;
+	margin: 0 auto;
+	margin-top: 50px; 
+}
+
+.center-align {
+	margin: 0 auto;
+	width: 50%;
+}
+
+#registerForm {
+	margin: 0 auto;
+	width: 80%;
+	margin-left: 20px;
+}
+
+#registerDiv {
+	width: 70%;
+	height: 75vh;
+	overflow: auto;
+	overflow-x: hidden;
+}
+
+#priceInput {
+	width: 95%;
+}
+
+body {
+	padding-top: 70px;
+}
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
