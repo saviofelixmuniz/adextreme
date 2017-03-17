@@ -27,6 +27,22 @@
 	width: 50%;
 }
 
+.negative-balance {
+	background-color: #D9534F;
+	color: white;
+	margin-left: 80px; 
+	margin-top: 40px;
+	height: 120px
+}
+
+.positive-balance {
+	background-color: #5cb85c;
+	color: white;
+	margin-left: 80px; 
+	margin-top: 40px;
+	height: 120px
+}
+
 #registerForm {
 	margin: 0 auto;
 	width: 80%;

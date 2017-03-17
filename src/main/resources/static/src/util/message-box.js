@@ -68,3 +68,20 @@ function $warningBox (title, message, confirm, cancel) {
 						  );
 	return box;
 }
+
+function $errorBox (title, message, callback) {
+	var box = $messageBox(title, message, "small", 'danger',
+						  {
+						  	ok: {
+						  		label : 'OK',
+						  		className : 'btn-danger',
+						  		callback : callback || function () {}
+						  	}
+						  }
+						  );
+	return box;
+}
+
+function $defaultError () {
+	return $errorBox("Erro de comunicação com o servidor", "Por favor, tente novamente.")
+}

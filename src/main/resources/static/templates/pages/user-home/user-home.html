@@ -1,9 +1,9 @@
 <div class="row" >
     <div class="col-xs-4" style="height: 80vh">
-        <div class="row">
-            <div class="well" style="background-color: #D9534F;color: white;margin-left: 80px; margin-top: 40px;height: 120px">
+        <div class="row" ng-init="updateBalance()">
+            <div class="well" ng-class="getClass()">
                 <h2 style="font-weight: bold; margin-top: 0px">Saldo</h2>
-                <h4 style="float:right;">R$ 343,50 D</h4>
+                <h4 style="float:right;">{{currentUser.credit | currency : "R$"}} {{getBalanceStatus()}}</h4>
             </div>
         </div>
         <div class="row">

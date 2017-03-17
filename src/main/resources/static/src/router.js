@@ -3,7 +3,9 @@ var LOGIN_PAGE = 'templates/pages/login/login.html';
 var REGISTER_PAGE = 'templates/pages/register/register.html';
 var AD_REGISTER_PAGE = 'templates/pages/ad-register/ad-register.html';
 var AD_PAGE = 'templates/pages/ad/ad.html';
+var USER_HOME_PAGE = 'templates/pages/user-home/user-home.html'
 
+var USER_HOME_CONTROLLER = "UserHomeCtrl"
 var LOGIN_CONTROLLER = "LoginCtrl";
 var REGISTER_CONTROLLER = "RegisterCtrl";
 var AD_REGISTER_CONTROLLER = "AdRegisterCtrl";
@@ -29,6 +31,10 @@ angular.module('adExtreme')
 	.when('/ad-register', {
 		templateUrl: AD_REGISTER_PAGE,
 		controller: AD_REGISTER_CONTROLLER
+	})
+	.when('/user-home', {
+		templateUrl: USER_HOME_PAGE,
+		controller: USER_HOME_CONTROLLER
 	})
 	.when('/ad', {
 		templateUrl: AD_PAGE,
