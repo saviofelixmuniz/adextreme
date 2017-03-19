@@ -90,4 +90,11 @@ public class AdController {
 
         return new ResponseEntity(ad, HttpStatus.OK);
     }
+
+    @RequestMapping(value = "/ads/transactions/{userID}", method = RequestMethod.GET)
+    public ResponseEntity<Collection> getTransactions(@PathVariable Long userID) {
+        return new ResponseEntity<Collection>(anuncioService.getTransactions(userID),HttpStatus.OK);
+    }
+
+
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -49,6 +50,15 @@ public class AdServiceImpl implements AdService {
 
     public Collection<Ad> getByBuyer (Long id) {
         return anuncioRepository.findByBuyerId(id);
+    }
+
+    public Collection<Ad> getTransactions (Long id) {
+        List<Ad> ads = anuncioRepository.getTransactions(id);
+        for (Ad ad:
+             ads) {
+            System.out.println(ad);
+        }
+        return ads;
     }
 
 
