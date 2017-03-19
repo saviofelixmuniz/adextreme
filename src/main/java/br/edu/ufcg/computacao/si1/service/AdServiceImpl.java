@@ -52,13 +52,8 @@ public class AdServiceImpl implements AdService {
         return anuncioRepository.findByBuyerId(id);
     }
 
-    public Collection<Ad> getTransactions (Long id) {
-        List<Ad> ads = anuncioRepository.getTransactions(id);
-        for (Ad ad:
-             ads) {
-            System.out.println(ad);
-        }
-        return ads;
+    public Collection<Ad> getTransactions (Long id, Boolean available) {
+        return anuncioRepository.getTransactions(id, available);
     }
 
 

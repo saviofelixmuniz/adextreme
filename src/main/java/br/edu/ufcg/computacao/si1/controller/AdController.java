@@ -93,7 +93,10 @@ public class AdController {
 
     @RequestMapping(value = "/ads/transactions/{userID}", method = RequestMethod.GET)
     public ResponseEntity<Collection> getTransactions(@PathVariable Long userID) {
-        return new ResponseEntity<Collection>(anuncioService.getTransactions(userID),HttpStatus.OK);
+        /*
+        Deve passar o boolean idicando se quer as transacoes que estao true ou false
+         */
+        return new ResponseEntity<Collection>(anuncioService.getTransactions(userID, false),HttpStatus.OK);
     }
 
 
