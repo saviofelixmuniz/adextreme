@@ -20,6 +20,7 @@
 	<script src="bower_components/angular-messages/angular-messages.js"></script>
 	<script src="bower_components/bootbox.js/bootbox.js"></script>
 	<script src="bower_components/blockUI/jquery.blockUI.js"></script>	
+	<script src="bower_components/spinjs/spin.js"></script>
 	
 	<!-- SCRIPTS IMPORT -->
 	<script src="src/app.js"></script>
@@ -42,9 +43,11 @@
 
 	<script src="src/directives/common/nav-bar.js"></script>
 	<script src="src/directives/common/error-message.js"></script>
+	<script src="src/directives/ad/ad-modal.js"></script>
 
 </head>
 <body ng-app="adExtreme" ng-controller="homeController">
+	<div id="spinner"></div>
 	<nav-bar logged-in="loggedIn" user="user"></nav-bar>
 	<div ng-view></div>
 

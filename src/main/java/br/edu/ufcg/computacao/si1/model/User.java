@@ -112,11 +112,11 @@ public class User {
                                             ad.getPrice(), ad.getNote(), ad.getType(), ad.getOwner(), "Venda"));
     }
 
-    public void sell(Double price) {
+    public void creditBalance(Double price) {
         credit += price;
     }
 
-    public void purchase(Double price) {
+    public void debitBalance(Double price) {
         credit -= price;
     }
 }

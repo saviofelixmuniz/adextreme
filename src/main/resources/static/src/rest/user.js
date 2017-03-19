@@ -2,8 +2,7 @@ angular.module("adExtreme")
 .factory("User", function UserFactory($http,PROPERTIES, $location, $rootScope) {
 	return {
         getBalance : function (userId) {
-            $mask();
-            return $http.get(PROPERTIES.authenticatedRestPath + "balance/" + userId);
+            return $http.get(PROPERTIES.authenticatedRestPath + "/balance/" + userId);
         },
 
         register : function (name, email, password, role) {
@@ -26,7 +25,6 @@ angular.module("adExtreme")
 		},
 
         logout : function () {
-            console.log("Logout :" + $rootScope.currentUser.name);
             $rootScope.currentUser = {};
             $rootScope.loggedIn = false;
             $location.path("/login");

@@ -11,6 +11,10 @@
 	color: #BDAAAA;
 }
 
+.modal-row {
+	margin-left: 20px;
+}
+
 .custom-jumbo {
 	width: 85%;
 	margin: 0 auto;

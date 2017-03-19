@@ -8,6 +8,9 @@ angular.module('adExtreme')
 		},
 		templateUrl: '/templates/directives/common/nav-bar.html',
 		controller: function ($element, $scope) {
+			$scope.unmask = function () {
+				$unmask();
+			}
 		}
 	};
 });

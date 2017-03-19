@@ -13,7 +13,7 @@
 		</tr>
 		</thead>
 		<tbody>
-		<tr ng-repeat = "ad in ads">
+		<tr ng-repeat = "ad in ads" style="cursor: pointer" ng-click="openAdModal($index)">
 			<th scope="row">{{$index + 1}}</th>
 			<td>{{ad.title}}</td>
 			<td>{{ad.role}}</td>

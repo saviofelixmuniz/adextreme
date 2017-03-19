@@ -43,6 +43,15 @@ public class AdServiceImpl implements AdService {
         return Optional.ofNullable(anuncioRepository.findOne(id));
     }
 
+    public Collection<Ad> getByUserId (Long id) {
+        return anuncioRepository.findByIdOwner(id);
+    }
+
+    public Collection<Ad> getByBuyer (Long id) {
+        return anuncioRepository.findByBuyerId(id);
+    }
+
+
     @Override
     public Collection<Ad> get(String tipo) {
 
@@ -57,7 +66,7 @@ public class AdServiceImpl implements AdService {
     public Collection<Ad> getAll() {
         /*aqui retornamos todos os anuncios, sem distincao*/
 
-        return anuncioRepository.findAll();
+        return anuncioRepository.findByAvailable(true);
     }
 
     @Override

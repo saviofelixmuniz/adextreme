@@ -3,6 +3,7 @@ package br.edu.ufcg.computacao.si1.model;
 import javax.persistence.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Comparator;
 import java.util.Date;
 
 /**
@@ -23,6 +24,9 @@ public class Ad {
     @Column(name = "title", nullable = false)
     private String title;
 
+    @Column(name = "available", nullable = false)
+    private boolean available;
+
     @Column(name = "post_date", nullable = false)
     private Date postDate;
 
@@ -38,6 +42,9 @@ public class Ad {
     @Column(name = "idOwner")
     private Long idOwner;
 
+    @Column(name = "buyerId")
+    private Long buyerId;
+
     @Column(name = "owner")
     private String owner;
 
@@ -49,6 +56,8 @@ public class Ad {
         this.type = type;
         this.idOwner = idOwner;
         this.owner = owner;
+        this.buyerId = null;
+        this.available = true;
     }
 
     public Ad() {
@@ -57,6 +66,7 @@ public class Ad {
         price = 0;
         note = "";
         type = "";
+        buyerId = null;
     }
 
     /**
@@ -132,6 +142,22 @@ public class Ad {
         this.owner = owner;
     }
 
+    public Long getBuyerId() {
+        return buyerId;
+    }
+
+    public void setBuyerId(Long buyerId) {
+        this.buyerId = buyerId;
+    }
+
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -174,14 +200,12 @@ public class Ad {
                 '}';
     }
 
-    public User[] toSell(User vendor, User buyer) {
-         vendor.sell(this.price);
+    public void handleTransaction(User vendor, User buyer) {
+         vendor.creditBalance(this.price);
          vendor.addSellerTransaction(this);
-         buyer.purchase(this.price);
+         buyer.debitBalance(this.price);
          buyer.addBuyerTransaction(this);
-
-         User[] users = {vendor, buyer};
-         return users;
-
     }
+
+
 }

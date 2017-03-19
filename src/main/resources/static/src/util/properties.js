@@ -1,14 +1,14 @@
 "use strict"
 
 var REST_PATH = '/user';
-var AUTHENTICATED_REST_PATH = '/user/';
+var AUTHENTICATED_REST_PATH = '/user';
 
-var AD_PATH = '/ads/';
-var PURCHASE_PATH = '/purchase/';
-var LOGIN_PATH = '/login/';
-var REGISTER_PATH = '/register/';
-var AUTHENTICATION_PATH = '/authenticate/';
-var USERS_PATH = '/users/';
+var AD_PATH = '/ads';
+var PURCHASE_PATH = '/purchase';
+var LOGIN_PATH = '/login';
+var REGISTER_PATH = '/register';
+var AUTHENTICATION_PATH = '/authenticate';
+var USERS_PATH = '/users';
 
 // ENUM errors
 

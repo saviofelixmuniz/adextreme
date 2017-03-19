@@ -2,7 +2,11 @@ angular.module("adExtreme")
     .factory("Advertisement", function AdFactory($http, PROPERTIES) {
         return {
             getAll : function () {
-                return $http.get(PROPERTIES.authenticatedRestPath + PROPERTIES.adPath);
+                return $http.get(PROPERTIES.authenticatedRestPath + PROPERTIES.adPath + "/all");
+            },
+
+            getByUser : function(userId) {
+                return $http.get(PROPERTIES.authenticatedRestPath + PROPERTIES.adPath + "/" + userId);
             },
 
             register : function(title, price, type, idOwner, owner) {

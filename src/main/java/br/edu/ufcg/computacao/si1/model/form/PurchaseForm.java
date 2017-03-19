@@ -5,22 +5,22 @@ package br.edu.ufcg.computacao.si1.model.form;
  */
 public class PurchaseForm {
 
-    private Long idComprador;
-    private Long idAnuncio;
+    private Long buyerId;
+    private Long adId;
 
-    public Long getIdComprador() {
-        return idComprador;
+    public Long getBuyerId() {
+        return buyerId;
     }
 
-    public void setIdComprador(Long idComprador) {
-        this.idComprador = idComprador;
+    public void setBuyerId(Long buyerId) {
+        this.buyerId = buyerId;
     }
 
-    public Long getIdAnuncio() {
-        return idAnuncio;
+    public Long getAdId() {
+        return adId;
     }
 
-    public void setIdAnuncio(Long idAnuncio) {
-        this.idAnuncio = idAnuncio;
+    public void setAdId(Long adId) {
+        this.adId = adId;
     }
 }
