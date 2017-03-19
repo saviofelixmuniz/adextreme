@@ -12,4 +12,4 @@ public interface AnuncioRepository extends JpaRepository<Ad, Long> {
     List<Ad> findByIdOwner (Long id);
     List<Ad> findByAvailable (boolean available);
     List<Ad> findByBuyerId (Long id);
-}
+}   

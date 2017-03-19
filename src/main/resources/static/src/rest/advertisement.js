@@ -1,6 +1,19 @@
 angular.module("adExtreme")
     .factory("Advertisement", function AdFactory($http, PROPERTIES) {
         return {
+            handleTransaction : function (buyerId, adId) {
+                console.log(buyerId);
+                console.log(adId);
+
+                var params = {
+                    buyerId : buyerId,
+                    adId : adId
+                };
+
+                return $http.post(PROPERTIES.authenticatedRestPath + PROPERTIES.adPath + "/purchase", 
+                                  params, {headers : PROPERTIES.JsonValue})
+            },
+
             getAll : function () {
                 return $http.get(PROPERTIES.authenticatedRestPath + PROPERTIES.adPath + "/all");
             },

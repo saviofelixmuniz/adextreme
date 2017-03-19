@@ -81,6 +81,7 @@ public class AdController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Este Comprador não existe.");
 
         ad.setAvailable(false);
+        ad.setBuyerId(buyer.getId());
         ad.handleTransaction(seller, buyer);
 
         anuncioService.update(ad);

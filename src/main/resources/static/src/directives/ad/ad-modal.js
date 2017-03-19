@@ -13,7 +13,13 @@ angular.module("adExtreme")
 	}
 
 	function buy () {
-		$rootScope.currentUser.credit -= $scope.currentAd.price;
+		Advertisement.handleTransaction($rootScope.currentUser.id, $scope.currentAd.id)
+		.then (function success (response) {
+			$rootScope.currentUser.credit -= $scope.currentAd.price;
+		}, function error (response) {
+			$defaultError();
+		});
+
 		$uibModalInstance.close();
 	}
 });
