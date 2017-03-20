@@ -2,6 +2,7 @@ package br.edu.ufcg.computacao.si1.controller;
 
 import br.edu.ufcg.computacao.si1.model.Ad;
 import br.edu.ufcg.computacao.si1.model.User;
+import br.edu.ufcg.computacao.si1.model.compare.ad.AdComparator;
 import br.edu.ufcg.computacao.si1.model.compare.ad.AdComparatorEnum;
 import br.edu.ufcg.computacao.si1.model.compare.ad.FactoryAdCompare;
 import br.edu.ufcg.computacao.si1.model.form.AdForm;
@@ -27,6 +28,8 @@ import java.util.List;
 @RequestMapping("/user")
 public class AdController {
 
+    AdComparator dateComparator = FactoryAdCompare.getComparator(AdComparatorEnum.DATE);
+
     @Autowired
     private AdServiceImpl anuncioService;
 
@@ -48,7 +51,7 @@ public class AdController {
     @RequestMapping(value = "/ads/bought/{userID}", method = RequestMethod.GET)
     public ResponseEntity<Collection> getBoughtAds(@PathVariable Long userID) {
         Collection<Ad> response = anuncioService.getByBuyer(userID);
-        Collections.sort((List) response, (Comparator) FactoryAdCompare.getComparator(AdComparatorEnum.DATE));
+        Collections.sort((List) response, dateComparator);
         return new ResponseEntity<Collection>(response, HttpStatus.OK);
     }
 
@@ -96,7 +99,10 @@ public class AdController {
         /*
         Deve passar o boolean idicando se quer as transacoes que estao true ou false
          */
-        return new ResponseEntity<Collection>(anuncioService.getTransactions(userID, false),HttpStatus.OK);
+
+        Collection<Ad> transactions = anuncioService.getTransactions(userID, false);
+        Collections.sort((List) transactions,dateComparator );
+        return new ResponseEntity<Collection>(transactions,HttpStatus.OK);
     }
 
 

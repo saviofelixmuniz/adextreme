@@ -47,6 +47,24 @@
 	height: 120px
 }
 
+.y-scroll {
+	overflow: auto;
+	overflow-x: hidden;
+}
+
+#transactionPagination {
+    position: absolute;
+    bottom: 5vh;
+    margin-left: 15vh;
+    text-align: center;	
+}
+
+#adPagination {
+	position: absolute;
+	bottom: 3vh;
+	margin-left: 45vh;
+}
+
 #registerForm {
 	margin: 0 auto;
 	width: 80%;
@@ -58,6 +76,18 @@
 	height: 75vh;
 	overflow: auto;
 	overflow-x: hidden;
+}
+
+#transactionsPanel {
+	margin-left: 80px;
+	height: 47.3vh;
+}
+
+#userAdPanel {
+	margin-left: 40px; 
+	margin-top: 40px; 
+	margin-right: 40px; 
+	height: 68.5vh
 }
 
 #priceInput {

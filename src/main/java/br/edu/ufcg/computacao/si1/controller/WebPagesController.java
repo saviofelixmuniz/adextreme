@@ -13,5 +13,4 @@ public class WebPagesController {
         return "forward:/index.html";
     }
 
-
 }

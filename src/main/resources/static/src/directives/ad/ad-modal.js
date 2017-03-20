@@ -13,10 +13,13 @@ angular.module("adExtreme")
 	}
 
 	function buy () {
+		$mask();
 		Advertisement.handleTransaction($rootScope.currentUser.id, $scope.currentAd.id)
 		.then (function success (response) {
+			$unmask();
 			$rootScope.currentUser.credit -= $scope.currentAd.price;
 		}, function error (response) {
+			$unmask();
 			$defaultError();
 		});
 

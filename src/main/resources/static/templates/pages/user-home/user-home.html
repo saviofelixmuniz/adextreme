@@ -1,42 +1,31 @@
 <div id="userHome" class="row">
     <div class="col-xs-4" style="height: 80vh">
-        <div class="row" ng-init="updateBalance();getUserAds()">
+        <div class="row" ng-init="loadUserInfo()">
             <div class="well" ng-class="getClass()">
                 <h2 style="font-weight: bold; margin-top: 0px">Saldo</h2>
                 <h4 style="float:right;">{{currentUser.credit | currency : "R$"}} {{getBalanceStatus()}}</h4>
             </div>
         </div>
         <div class="row">
-            <div class="panel panel-primary" style="margin-left: 80px">
-                <div class="panel-heading" ">
+            <div id="transactionsPanel" class="panel panel-primary">
+                <div class="panel-heading">
                     <h3 class="panel-title">Últimas transações</h3>
                 </div>
-                <div class="panel-body">
+                <div class="panel-body y-scroll">
                     <div class="list-group">
-                        <a href="#" class="list-group-item" style="color: #D9534F">
-                            Anúncio 1
-                            <p style="float: right">- R$ 300,00</p>
-                        </a>
-                        <a href="#" class="list-group-item" style="color: #D9534F">
-                            Anúncio 2
-                            <p style="float: right">- R$ 250,00</p>
-                        </a>
-                        <a href="#" class="list-group-item" style="color: #5cb85c">
-                            Anúncio 3
-                            <p style="float: right">+ R$ 200,00</p>
-                        </a>
-                        <a class="list-group-item" style="color: #D9534F">
-                            Anúncio 4
-                            <p style="float: right">- R$ 550,00</p>
+                        <a ng-repeat="transaction in current.transactions" href="#" class="list-group-item" ng-style="{'color': getTransactionColor(transaction)}">
+                            {{transaction.title}}
+                            <p style="float: right">{{getTransactionSign(transaction)}} {{transaction.price | currency : "R$"}}</p>
                         </a>
                     </div>
+                    <ul id="transactionPagination" uib-pagination class="pagination-sm" total-items="transactions.length" items-per-page="4" ng-model="current.transactionPage" ng-change="pageChanged('transaction')" next-text="Próximo" previous-text="Anterior"></ul>
                 </div>
             </div>
         </div>
 
     </div>
     <div class="col-xs-8">
-        <div class="panel panel-primary" style="margin-left: 40px; margin-top: 40px; margin-right: 40px; height: 450px">
+        <div id="userAdPanel" class="panel panel-primary">
             <div class="panel-heading">
                 <h3 class="panel-title">Meus Anúncios</h3>
             </div>
@@ -49,23 +38,23 @@
                         <th>Tipo</th>
                         <th>Postado</th>
                         <th>Preço</th>
-                        <th>Criador do anúncio</th>
+                        <th>Status</th>
                     </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat = "ad in userAds">
+                        <tr ng-repeat = "ad in current.ads">
                             <th scope="row">{{$index + 1}}</th>
                             <td>{{ad.title}}</td>
                             <td>{{ad.type}}</td>
                             <td>{{ad.postDate}}</td>
                             <td>{{ad.price | currency : "R$"}}</td>
-                            <td>{{ad.owner}}</td>
+                            <td ng-style="{'color':getAdStatusStyle(ad)}"><b>{{getAdStatus(ad)}}</b></td>
                         </tr>
                     </tbody>
                 </table>
+                <ul id="adPagination" uib-pagination class="pagination-sm pagination-position" total-items="userAds.length" items-per-page="8" ng-model="current.adPage" ng-change="pageChanged('ad')" next-text="Próximo" previous-text="Anterior"></ul>
             </div>
         </div>
-        <button class="btn btn-primary" ng-click="test()"></button>
     </div>
 
 </div>

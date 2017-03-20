@@ -16,7 +16,6 @@ angular.module('adExtreme')
         Advertisement.getAll().
         then (function success (ads) {
             $scope.ads = ads.data;
-            console.log("Novos anuncios cadastrados: " + ads.data);
         }, function error (error) {
             $defaultError();
         });

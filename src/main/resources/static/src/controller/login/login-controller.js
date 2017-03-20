@@ -36,9 +36,7 @@ angular.module('adExtreme')
 				localStorage.setItem("adExtremeUserToken", response.data.token);
 				$rootScope.currentUser = response.data.user;
                 $rootScope.loggedIn = true;
-                console.log($rootScope.currentUser);
-				console.log("Usuario Logado: " + $rootScope.currentUser.name);
-				$location.path("/ad");
+				$location.path("/user-home");
 		},
 			function (response) {
 				if (response.status == 404) addAlert("Usuário não encontrado.");

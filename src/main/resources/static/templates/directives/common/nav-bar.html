@@ -1,7 +1,7 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header"">
-            <a class="navbar-brand" href="#" ng-click="unmask()">
+            <a class="navbar-brand" href="#">
                 <span class="glyphicon glyphicon-usd" aria-hidden="true"></span>
                 ad-extreme
             </a>
@@ -23,7 +23,13 @@
         </ul>
 
         <div ng-show="loggedIn">
-            <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav" style="margin-left: 10px">
+                <li>
+                    <a href="/#!/user-home">
+                        <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+                        Minha conta
+                    </a>
+                </li>
                 <li class="dropdown" uib-dropdown is-open="status.isopen">
                       <a uib-dropdown-toggle ng-disabled="disabled" style="cursor: pointer">
                           Anúncios
