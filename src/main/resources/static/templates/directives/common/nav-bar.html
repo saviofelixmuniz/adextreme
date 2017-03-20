@@ -1,49 +1,53 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header"">
-            <a class="navbar-brand" href="#" ng-click="unmask()">
-                <span class="glyphicon glyphicon-usd" aria-hidden="true"></span>
-                ad-extreme
+        <a class="navbar-brand" href="#">
+            <span class="glyphicon glyphicon-usd" aria-hidden="true"></span>
+            ad-extreme
+        </a>
+    </div>
+    <ul class="nav navbar-nav navbar-right" ng-show="!loggedIn">
+        <li>
+            <a href="/#!/register">
+                <span class="glyphicon glyphicon-user" aria-hidden='true'></span>
+                Cadastra-se
             </a>
-        </div>
-
-        <ul class="nav navbar-nav navbar-right" ng-show="!loggedIn">
+        </li>
+        <li>
+            <a href="/#!/login">
+                <span class="glyphicon glyphicon-log-in" aria-hidden='true'></span>
+                Login
+            </a>
+        </li>
+    </ul>
+    <div ng-show="loggedIn">
+        <ul class="nav navbar-nav">
+            <li class="dropdown" uib-dropdown is-open="status.isopen">
+                <a uib-dropdown-toggle ng-disabled="disabled" style="cursor: pointer">
+                    Anúncios
+                    <span class="caret">
+                </a>
+                <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+                    <li role="menuitem"><a href="/#!/ad">Lista de anúncios</a></li>
+                    <li class="divider"></li>
+                    <li role="menuitem"><a href="/#!/ad-register">Cadastrar anúncio</a></li>
+                </ul>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
             <li>
-            	<a href="/#!/register">
-            		<span class="glyphicon glyphicon-user" aria-hidden='true'></span>
-                	Cadastra-se
+                <a>
+                    <span class="glyphicon glyphicon-user" aria-hidden='true'></span>
+                    Olá {Nome do usuario aqui}
                 </a>
             </li>
             <li>
-                <a href="/#!/login">
-                    <span class="glyphicon glyphicon-log-in" aria-hidden='true'></span>
-                    Login
+                <a ng-click="logout">
+                    <span class="glyphicon glyphicon-log-out" aria-hidden='true'></span>
+                    Logout
                 </a>
             </li>
         </ul>
-
-        <div ng-show="loggedIn">
-            <ul class="nav navbar-nav">
-                <li class="dropdown" uib-dropdown is-open="status.isopen">
-                      <a uib-dropdown-toggle ng-disabled="disabled" style="cursor: pointer">
-                          Anúncios
-                          <span class="caret">
-                      </a>
-                      <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
-                        <li role="menuitem"><a href="/#!/ad">Lista de anúncios</a></li>
-                        <li class="divider"></li>
-                        <li role="menuitem"><a href="/#!/ad-register">Cadastrar anúncio</a></li>
-                      </ul>
-                </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a ng-click="logout()">
-                        <span class="glyphicon glyphicon-log-out" aria-hidden='true'></span>
-                        Logout
-                    </a>                    
-                </li>
-            </ul>
-        </div>
+    </div>
     </div>
 </nav>

@@ -13,22 +13,12 @@
                 </div>
                 <div class="panel-body">
                     <div class="list-group">
-                        <a href="#" class="list-group-item" style="color: #D9534F">
-                            Anúncio 1
-                            <p style="float: right">- R$ 300,00</p>
-                        </a>
-                        <a href="#" class="list-group-item" style="color: #D9534F">
-                            Anúncio 2
-                            <p style="float: right">- R$ 250,00</p>
-                        </a>
-                        <a href="#" class="list-group-item" style="color: #5cb85c">
-                            Anúncio 3
-                            <p style="float: right">+ R$ 200,00</p>
-                        </a>
-                        <a class="list-group-item" style="color: #D9534F">
-                            Anúncio 4
-                            <p style="float: right">- R$ 550,00</p>
-                        </a>
+                        <div ng-repeat="ad in userAds">
+                            <a class="list-group-item" style="color: #D9534F">
+                            {{ad.title}}
+                            <p style="float: right">{{ad.price | currency : "R$"}}</p>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
