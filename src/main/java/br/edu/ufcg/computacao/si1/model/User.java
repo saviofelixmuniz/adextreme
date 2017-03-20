@@ -14,35 +14,28 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column
-    private String name;
-    @Column(unique = true)
-    private String email;
-    @Column
-    private String password;
-    @Column
-    private String role;
-    @Column
-    @NotNull
-    private Double credit;
-    @Column
-    @OneToMany(cascade = {CascadeType.ALL, CascadeType.REMOVE}, orphanRemoval = true)
-    private List<Transaction> transactions;
 
+    @Column(unique = true)              private String email;
+    @Column(name = "name")              private String name;
+    @Column(name = "password")          private String password;
+    @Column(name = "role") @Enumerated(EnumType.STRING)    private PersonType role;
+    @Column(name = "credit")@NotNull    private Double credit;
+    @Column(name = "note")              private Integer note;
 
-    public User() {
+    public User() {}
 
-    }
-
-    public User(String name, String email, String password, String role) {
-
+    public User(String name, String email, String password, PersonType role) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.role = role;
         this.credit = new Double(0);
-        this.transactions = new LinkedList<>();
+        this.note = new Integer(0);
     }
+
+    // -----------------------
+    // ---> gets and sets <---
+    // -----------------------
 
     public Long getId() {
         return id;
@@ -76,11 +69,11 @@ public class User {
         this.password = password;
     }
 
-    public String getRole() {
+    public PersonType getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(PersonType role) {
         this.role = role;
     }
 
@@ -92,31 +85,21 @@ public class User {
         this.credit = credit;
     }
 
-    public Collection<Transaction> getTransactions() {
-        return this.transactions;
+    public Integer getNote() {
+        return note;
     }
 
-    public void setTransactions(List<Transaction> transactions) {
-        this.transactions = transactions;
+    public void setNote(Integer note) {
+        this.note = note;
     }
 
-    public void addBuyerTransaction(Ad ad) {
-        // transação de compra
-        this.transactions.add(new Transaction(ad.getTitle(), ad.getDate(), ad.getPrice(),
-                                                ad.getNote(), ad.getType(), ad.getOwner(), "Purchase"));
-    }
 
-    public void addSellerTransaction(Ad ad){
-        // transação de venda
-        this.transactions.add(new Transaction(ad.getTitle(), ad.getDate(),
-                                            ad.getPrice(), ad.getNote(), ad.getType(), ad.getOwner(), "Venda"));
-    }
+    // -----------------
+    // ---> methods <---
+    // -----------------
 
-    public void creditBalance(Double price) {
-        credit += price;
-    }
 
-    public void debitBalance(Double price) {
-        credit -= price;
-    }
+    public void creditBalance(Double price) {credit += price;}
+
+    public void debitBalance(Double price) {credit -= price;}
 }

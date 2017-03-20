@@ -1,4 +1,4 @@
-package br.edu.ufcg.computacao.si1.model.compare.ad;
+package br.edu.ufcg.computacao.si1.model.comparators;
 
 import br.edu.ufcg.computacao.si1.model.Ad;
 
@@ -8,6 +8,6 @@ import br.edu.ufcg.computacao.si1.model.Ad;
 public class AdDateComparator implements AdComparator {
     @Override
     public int compare(Ad ad, Ad anotherAd) {
-        return (int) -(ad.getDate().getTime() - anotherAd.getDate().getTime());
+        return (int) -(ad.getPostDate().getTime() - anotherAd.getPostDate().getTime());
     }
 }

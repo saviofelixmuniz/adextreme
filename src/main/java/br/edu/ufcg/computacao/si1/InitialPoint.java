@@ -9,6 +9,11 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class InitialPoint {
 
+
+	/**
+	 * Token filter
+	 * @return
+	 */
 	@Bean
 	public FilterRegistrationBean getFiltroJwt() {
 		FilterRegistrationBean frb = new FilterRegistrationBean();

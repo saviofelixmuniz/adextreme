@@ -1,69 +1,72 @@
 package br.edu.ufcg.computacao.si1.service;
 
+import br.edu.ufcg.computacao.si1.model.PersonType;
 import br.edu.ufcg.computacao.si1.model.User;
 import br.edu.ufcg.computacao.si1.model.form.UserForm;
-import br.edu.ufcg.computacao.si1.repository.UsuarioRepository;
+import br.edu.ufcg.computacao.si1.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
-import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
 
-    private UsuarioRepository usuarioRepository;
+    private UserRepository userRepository;
 
     @Autowired
-    public void setUsuarioRepository(UsuarioRepository usuarioRepository) {
-        this.usuarioRepository = usuarioRepository;
+    public void setUserRepository(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
+
+    public UserRepository getUserRepository() {
+        return userRepository;
+    }
+
+    // ---> methods
 
     @Override
     public User create(UserForm userForm) {
 
         User user = null;
 
-        if (userForm.getRole().equals("fisica")) {
+        if (userForm.getRole().equalsIgnoreCase(PersonType.FISICA.toString())) {
             user = new User(userForm.getName(), userForm.getEmail(),
-                    userForm.getPassword(), "USER");
+                    userForm.getPassword(), PersonType.FISICA);
         }
-        else if (userForm.getRole().equals("juridica")) {
+        else if (userForm.getRole().equalsIgnoreCase(PersonType.JURIDICA.toString())) {
             user = new User(userForm.getName(), userForm.getEmail(),
-                    userForm.getPassword(), "COMPANY");
-            user.setRole("COMPANY");
+                    userForm.getPassword(), PersonType.JURIDICA);
+        } else {
+            // caso de algum problema, cria usuario fisico mesmo
+            user = new User(userForm.getName(), userForm.getEmail(),
+                    userForm.getPassword(), PersonType.FISICA);
+
         }
 
         System.out.println(user + "estah sendo criado");
-        return usuarioRepository.save(user);
+        return userRepository.save(user);
     }
 
     @Override
-    public Optional<User> getById(Long id) {
-        return Optional.ofNullable(usuarioRepository.findOne(id));
-    }
-
-
-    public User findById(Long id) {
-        return usuarioRepository.findOne(id);
+    public User getById(Long id) {
+        return userRepository.findOne(id);
     }
 
     @Override
-    public Optional<User> getByEmail(String email) {
-        System.out.println(email + "estah sendo retornado");
-        return Optional.ofNullable(usuarioRepository.findByEmail(email));
+    public User getByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 
     @Override
     public Collection<User> getAll() {
-        return usuarioRepository.findAll();
+        return userRepository.findAll();
     }
 
     @Override
     public boolean update(User user) {
-        System.out.println(user + "estah sendo atualizado");
-        if (usuarioRepository.exists(user.getId())) {
-            usuarioRepository.save(user);
+        if (userRepository.exists(user.getId())) {
+            userRepository.save(user);
             return true;
         }
         return false;
@@ -71,14 +74,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean delete(Long id) {
-        if (usuarioRepository.exists(id)) {
-            usuarioRepository.delete(id);
+        if (userRepository.exists(id)) {
+            userRepository.delete(id);
             return true;
         }
         return false;
     }
 
-    public User findByEmail(String email) {
-        return usuarioRepository.findByEmail(email);
-    }
 }

@@ -1,4 +1,4 @@
-package br.edu.ufcg.computacao.si1.model.compare.ad;
+package br.edu.ufcg.computacao.si1.model.comparators;
 
 import br.edu.ufcg.computacao.si1.model.Ad;
 
