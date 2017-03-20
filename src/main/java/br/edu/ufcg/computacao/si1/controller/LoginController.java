@@ -28,13 +28,13 @@ public class LoginController {
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<LoginResponse> authenticate(@RequestBody LoginForm loginForm) {
 
-        if (!usuarioService.getByEmail(loginForm.getEmail()).isPresent())
+        if (usuarioService.getByEmail(loginForm.getEmail()) == null)
             return new ResponseEntity<LoginResponse>(HttpStatus.NOT_FOUND);
 
         if (loginForm.getEmail() == null || loginForm.getPassword() == null)
             return new ResponseEntity<LoginResponse>(HttpStatus.BAD_REQUEST);
 
-        User user = usuarioService.findByEmail(loginForm.getEmail());
+        User user = usuarioService.getByEmail(loginForm.getEmail());
 
         if (!user.getPassword().equals(loginForm.getPassword()))
             return new ResponseEntity<LoginResponse>(HttpStatus.UNAUTHORIZED);

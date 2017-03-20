@@ -20,7 +20,7 @@ public class RegisterController {
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ResponseEntity<User> register(@RequestBody UserForm userForm){
 
-        if (usuarioService.getByEmail(userForm.getEmail()).isPresent())
+        if (usuarioService.getByEmail(userForm.getEmail()) != null)
             return new ResponseEntity<>(HttpStatus.CONFLICT);
 
         User user = usuarioService.create(userForm);

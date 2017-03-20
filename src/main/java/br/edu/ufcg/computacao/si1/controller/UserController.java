@@ -30,7 +30,7 @@ public class UserController {
 
     @RequestMapping(value = "/user/balance/{userID}", method = RequestMethod.GET)
     public ResponseEntity<Double> getUserBalance (@PathVariable Long userID) {
-        return new ResponseEntity<Double>(usuarioService.getById(userID).get().getCredit(), HttpStatus.OK);
+        return new ResponseEntity<Double>(usuarioService.getById(userID).getCredit(), HttpStatus.OK);
     }
 
 

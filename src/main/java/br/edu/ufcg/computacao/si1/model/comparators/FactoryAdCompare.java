@@ -1,4 +1,4 @@
-package br.edu.ufcg.computacao.si1.model.compare.ad;
+package br.edu.ufcg.computacao.si1.model.comparators;
 
 /**
  * Created by saviomuniz on 19/03/17.
