@@ -48,15 +48,12 @@ public interface AdRepository extends JpaRepository<Ad, Long> {
     Collection<Ad> getTransactions (@Param("id") Long id, @Param("available") Boolean available);
 
 
-    /**
-     * Updates the note value of the Ad
-     * @param idAd
-     * @param none
-     * @return
-     */
+    /*
+    Updates the note value of the Ad
     @Modifying(clearAutomatically = true)
     @Transactional
     @Query(value = "update Ad a set a.note=:note where a.id=:idAd")
     int updateNote(@Param("idAd") Long idAd, @Param("note") Integer none);
+    */
 
 }

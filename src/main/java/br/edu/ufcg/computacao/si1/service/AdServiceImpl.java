@@ -43,16 +43,6 @@ public class AdServiceImpl implements AdService {
     }
 
     @Override
-    public boolean setNoteById(Long adId, Integer note) {
-        int n = adRepository.updateNote(adId, note);
-        if (n==1)
-            return true;
-        else
-            return false;
-
-    }
-
-    @Override
     public Ad create(AdForm adForm) {
         Ad ad = new Ad(adForm.getTitle(), adForm.getPrice(), adForm.getType(), adForm.getIdOwner(), adForm.getOwner());
         return adRepository.save(ad);

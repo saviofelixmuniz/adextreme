@@ -26,8 +26,6 @@ public interface AdService {
 
     Collection<Ad> getTransactions(Long id, Boolean available);
 
-    boolean setNoteById(Long adId, Integer note);
-
     Collection<Ad> getByAvailable();
 
     Collection<Ad> getByType(String type);

@@ -98,14 +98,5 @@ public class AdController {
         return new ResponseEntity<Collection>(adService.getTransactions(userID, false),HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/ads/{adId}/{note}")
-    public ResponseEntity setNoteById(@PathVariable Long adId, @PathVariable Integer note) {
-        Boolean ok = adService.setNoteById(adId, note);
-        if (ok)
-            return new ResponseEntity(HttpStatus.OK);
-        else
-            return new ResponseEntity(HttpStatus.BAD_REQUEST);
-    }
-
 
 }
