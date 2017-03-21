@@ -15,12 +15,19 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(unique = true)              private String email;
-    @Column(name = "name")              private String name;
-    @Column(name = "password")          private String password;
-    @Column(name = "role") @Enumerated(EnumType.STRING)    private PersonType role;
-    @Column(name = "credit")@NotNull    private Double credit;
-    @Column(name = "note")              private Integer note;
+    @Column(unique = true)                                  private String email;
+    @Column(name = "name")                                  private String name;
+    @Column(name = "password")                              private String password;
+    @Column(name = "role") @Enumerated(EnumType.STRING)     private PersonType role;
+    @Column(name = "credit")@NotNull                        private Double credit;
+    @Column(name = "rating_sum")                            private Integer ratingSum;
+    @Column(name = "rating_count")                          private Integer ratingCount;
+
+
+    @Column(name = "qualifications_alerts")
+    @OneToMany(cascade = {CascadeType.ALL, CascadeType.REMOVE}, orphanRemoval = true)
+    private List<QualificationAlert> qualificationsAlerts;
+
 
     public User() {}
 
@@ -30,7 +37,9 @@ public class User {
         this.password = password;
         this.role = role;
         this.credit = new Double(0);
-        this.note = new Integer(0);
+        this.ratingSum = new Integer(0);
+        this.ratingCount = new Integer(0);
+        this.qualificationsAlerts = new LinkedList<>();
     }
 
     // -----------------------
@@ -85,12 +94,28 @@ public class User {
         this.credit = credit;
     }
 
-    public Integer getNote() {
-        return note;
+    public Integer getRatingSum() {
+        return ratingSum;
     }
 
-    public void setNote(Integer note) {
-        this.note = note;
+    public void setRatingSum(Integer ratingSum) {
+        this.ratingSum = ratingSum;
+    }
+
+    public Integer getRatingCount() {
+        return ratingCount;
+    }
+
+    public void setRatingCount(Integer ratingCount) {
+        this.ratingCount = ratingCount;
+    }
+
+    public List<QualificationAlert> getQualificationsAlerts() {
+        return qualificationsAlerts;
+    }
+
+    public void setQualificationsAlerts(List<QualificationAlert> qualificationsAlerts) {
+        this.qualificationsAlerts = qualificationsAlerts;
     }
 
 
@@ -102,4 +127,25 @@ public class User {
     public void creditBalance(Double price) {credit += price;}
 
     public void debitBalance(Double price) {credit -= price;}
+
+    public void sumRating(Integer ratingValue) {
+        if (ratingValue > 5)
+            this.ratingSum += 5;
+        if (ratingValue > 0 && ratingValue <= 5)
+            this.ratingSum += ratingValue;
+    }
+
+    public Integer avarageRating(){
+        if (ratingCount > 0)
+            return ratingSum/ratingCount;
+
+        return ratingSum;
+    }
+
+    public boolean addQualificationAlert(QualificationAlert alert) {
+        if (alert == null)
+            return false;
+        return qualificationsAlerts.add(alert);
+    }
+
 }
