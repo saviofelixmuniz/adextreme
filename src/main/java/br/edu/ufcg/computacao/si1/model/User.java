@@ -1,8 +1,9 @@
 package br.edu.ufcg.computacao.si1.model;
 
+import br.edu.ufcg.computacao.si1.model.EnumTypes.PersonType;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -133,6 +134,8 @@ public class User {
             this.ratingSum += 5;
         if (ratingValue > 0 && ratingValue <= 5)
             this.ratingSum += ratingValue;
+
+        this.ratingCount++;
     }
 
     public Integer avarageRating(){
@@ -148,4 +151,12 @@ public class User {
         return qualificationsAlerts.add(alert);
     }
 
+    public void setAlertQualificatedById(Long alertId) {
+        for (int i=0; i< qualificationsAlerts.size(); i++){
+            if (qualificationsAlerts.get(i).getId() == alertId) {
+                qualificationsAlerts.get(i).setQualified(true);
+                break;
+            }
+        }
+    }
 }

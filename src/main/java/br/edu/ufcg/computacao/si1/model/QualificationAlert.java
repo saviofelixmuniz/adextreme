@@ -1,5 +1,7 @@
 package br.edu.ufcg.computacao.si1.model;
 
+import br.edu.ufcg.computacao.si1.model.EnumTypes.TransactionType;
+
 import javax.persistence.*;
 
 /**
@@ -13,19 +15,15 @@ public class QualificationAlert {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "buyer_id")          private Long buyerId;
-    @Column(name = "seller_id")         private Long sellerId;
-    @Column(name = "ad_id")             private Long adId;
-    @Column(name = "transaction_type")  private String transactionType;
-    @Column(name = "qualified")         private boolean qualified;
+    @Column(name = "user_to_qualify_id")                            private Long userToQualifyId;
+    @Column(name = "ad_id")                                         private Long adId;
+    @Column(name = "transaction_type")@Enumerated(EnumType.STRING)  private TransactionType transactionType; // sale or purchase
+    @Column(name = "qualified")                                     private boolean qualified;
 
-    public QualificationAlert(){
+    public QualificationAlert() {}
 
-    }
-
-    public QualificationAlert(Long buyerId, Long sellerId, Long adId, String transactionType, boolean qualified) {
-        this.buyerId = buyerId;
-        this.sellerId = sellerId;
+    public QualificationAlert(Long userToQualifyId, Long adId, TransactionType transactionType, boolean qualified) {
+        this.userToQualifyId = userToQualifyId;
         this.adId = adId;
         this.transactionType = transactionType;
         this.qualified = qualified;
@@ -39,20 +37,13 @@ public class QualificationAlert {
         this.id = id;
     }
 
-    public Long getBuyerId() {
-        return buyerId;
+
+    public Long getUserToQualifyId() {
+        return userToQualifyId;
     }
 
-    public void setBuyerId(Long buyerId) {
-        this.buyerId = buyerId;
-    }
-
-    public Long getSellerId() {
-        return sellerId;
-    }
-
-    public void setSellerId(Long sellerId) {
-        this.sellerId = sellerId;
+    public void setUserToQualifyId(Long userToQualifyId) {
+        this.userToQualifyId = userToQualifyId;
     }
 
     public Long getAdId() {
@@ -63,11 +54,11 @@ public class QualificationAlert {
         this.adId = adId;
     }
 
-    public String getTransactionType() {
+    public TransactionType getTransactionType() {
         return transactionType;
     }
 
-    public void setTransactionType(String transactionType) {
+    public void setTransactionType(TransactionType transactionType) {
         this.transactionType = transactionType;
     }
 

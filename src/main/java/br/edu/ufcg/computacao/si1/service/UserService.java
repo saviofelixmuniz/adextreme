@@ -27,4 +27,6 @@ public interface UserService {
     boolean update(User user);
 
     boolean delete(Long id);
+
+    User qualifyUserById(Long idUserToQualify,Long alertId, Integer ratingValue);
 }

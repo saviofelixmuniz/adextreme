@@ -1,5 +1,7 @@
 package br.edu.ufcg.computacao.si1.model;
 
+import br.edu.ufcg.computacao.si1.model.EnumTypes.TransactionType;
+
 import javax.persistence.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -192,9 +194,12 @@ public class Ad {
 
 
     public void handleTransaction(User vendor, User buyer) {
-
-        vendor.creditBalance(this.price);
-        buyer.debitBalance(this.price);
+        if (vendor != null && buyer != null) {
+            vendor.creditBalance(this.price);
+            vendor.addQualificationAlert(new QualificationAlert(buyer.getId(), this.id, TransactionType.VENDA, false));
+            buyer.debitBalance(this.price);
+            buyer.addQualificationAlert(new QualificationAlert(buyer.getId(), this.id, TransactionType.COMPRA, false));
+        }
     }
 
 }

@@ -1,4 +1,4 @@
-package br.edu.ufcg.computacao.si1.model;
+package br.edu.ufcg.computacao.si1.model.EnumTypes;
 
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;

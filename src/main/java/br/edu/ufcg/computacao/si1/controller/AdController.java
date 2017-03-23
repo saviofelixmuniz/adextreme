@@ -98,5 +98,4 @@ public class AdController {
         return new ResponseEntity<Collection>(adService.getTransactions(userID, false),HttpStatus.OK);
     }
 
-
 }

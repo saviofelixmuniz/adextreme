@@ -1,6 +1,6 @@
 package br.edu.ufcg.computacao.si1.service;
 
-import br.edu.ufcg.computacao.si1.model.PersonType;
+import br.edu.ufcg.computacao.si1.model.EnumTypes.PersonType;
 import br.edu.ufcg.computacao.si1.model.User;
 import br.edu.ufcg.computacao.si1.model.form.UserForm;
 import br.edu.ufcg.computacao.si1.repository.UserRepository;
@@ -79,6 +79,18 @@ public class UserServiceImpl implements UserService {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public User qualifyUserById(Long idUserToQualify,Long alertId, Integer ratingValue) {
+        //int resp = userRepository.updateRating(idUserToQualify, (ratingValue+ratingSum));
+        User u = userRepository.findOne(idUserToQualify);
+        if (u != null) {
+            u.sumRating(ratingValue);
+            u.setAlertQualificatedById(alertId);
+            this.update(u);
+        }
+        return u;
     }
 
 }
