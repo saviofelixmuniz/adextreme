@@ -23,6 +23,7 @@ public class User {
     @Column(name = "credit")@NotNull                        private Double credit;
     @Column(name = "rating_sum")                            private Integer ratingSum;
     @Column(name = "rating_count")                          private Integer ratingCount;
+    @Column(name = "average_rating")                       private Integer averageRating;
 
 
     @Column(name = "qualifications_alerts")
@@ -41,6 +42,7 @@ public class User {
         this.ratingSum = new Integer(0);
         this.ratingCount = new Integer(0);
         this.qualificationsAlerts = new LinkedList<>();
+        this.averageRating = 0;
     }
 
     // -----------------------
@@ -118,6 +120,13 @@ public class User {
     public void setQualificationsAlerts(List<QualificationAlert> qualificationsAlerts) {
         this.qualificationsAlerts = qualificationsAlerts;
     }
+    public Integer getAvarageRating() {
+        return averageRating;
+    }
+
+    public void setAvarageRating(Integer averageRating) {
+        this.averageRating = averageRating;
+    }
 
 
     // -----------------
@@ -136,9 +145,10 @@ public class User {
             this.ratingSum += ratingValue;
 
         this.ratingCount++;
+        this.averageRating = calculateAverageRating();
     }
 
-    public Integer avarageRating(){
+    public Integer calculateAverageRating(){
         if (ratingCount > 0)
             return ratingSum/ratingCount;
 
