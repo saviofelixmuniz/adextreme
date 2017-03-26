@@ -22,6 +22,10 @@ import java.util.List;
 @RequestMapping("/user")
 public class AdController {
 
+    /*
+        All methods that have "/user" can only be accessed if the user is authenticated.
+     */
+
     @Autowired
     private AdServiceImpl adService;
 
@@ -29,11 +33,11 @@ public class AdController {
     private UserServiceImpl usuarioService;
 
     @RequestMapping(value = "/ads/single/{adID}", method = RequestMethod.GET)
-    public ResponseEntity<Ad> getAd (@PathVariable Long adID) {
+    public ResponseEntity<Ad> getAd(@PathVariable Long adID) {
         Ad response = adService.getById(adID);
         if (response == null)
-            return new ResponseEntity<Ad>(HttpStatus.NOT_FOUND);
-        return new ResponseEntity<Ad>(response, HttpStatus.OK);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/ads/all", method = RequestMethod.GET)
@@ -55,25 +59,21 @@ public class AdController {
         Collection<Ad> response = adService.getAdByBuyerId(userID);
         if (response == null)
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        Collections.sort((List) response, (Comparator) FactoryAdCompare.getComparator(AdComparatorEnum.DATE));
-        return new ResponseEntity<Collection>(response, HttpStatus.OK);
+        Collections.sort((List<Ad>) response, (Comparator<Ad>) FactoryAdCompare.getComparator(AdComparatorEnum.DATE));
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/ads", method = RequestMethod.POST)
     public ResponseEntity registerAd(@RequestBody AdForm adForm){
-
         if (adForm.getIdOwner() != null && usuarioService.getById(adForm.getIdOwner()) == null){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Este usuário não existe!");
         }
-
         Ad ad = adService.create(adForm);
         return new ResponseEntity(ad, HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/ads/purchase", method = RequestMethod.POST)
     public ResponseEntity purchase(@RequestBody PurchaseForm purchaseForm){
-        //id item, id comprador
-
         Ad ad = adService.getById(purchaseForm.getAdId());
 
         if (ad == null)

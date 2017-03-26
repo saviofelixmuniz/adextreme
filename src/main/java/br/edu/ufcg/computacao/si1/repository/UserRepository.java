@@ -12,7 +12,12 @@ public interface UserRepository extends JpaRepository<User,Long>{
 
     User findByEmail(String email);
 
-    //Update user ratingSum variable
+    /**
+     * Update user ratingSum variable
+     * @param idUser
+     * @param ratingValue
+     * @return
+     */
     @Modifying(clearAutomatically = true)
     @Transactional
     @Query(value = "update User u set u.ratingSum=:ratingValue where u.id=:idUser")

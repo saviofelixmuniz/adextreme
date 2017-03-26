@@ -23,7 +23,7 @@ public class User {
     @Column(name = "credit")@NotNull                        private Double credit;
     @Column(name = "rating_sum")                            private Integer ratingSum;
     @Column(name = "rating_count")                          private Integer ratingCount;
-    @Column(name = "average_rating")                       private Integer averageRating;
+    @Column(name = "average_rating")                        private Integer averageRating;
 
     @Column(name = "qualifications_alerts")
     @OneToMany(cascade = {CascadeType.ALL, CascadeType.REMOVE}, orphanRemoval = true)
@@ -72,7 +72,9 @@ public class User {
         this.email = email;
     }
 
-    public String getPassword() {
+    // O get do password foi removido por converção para que não seja retornado quando o spring retornar o objeto
+    // É apenas uma seguranaça a mais ja que a forma de autenticação é simples.
+    public String password() {
         return password;
     }
 

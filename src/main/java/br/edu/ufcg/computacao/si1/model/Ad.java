@@ -1,5 +1,6 @@
 package br.edu.ufcg.computacao.si1.model;
 
+import br.edu.ufcg.computacao.si1.model.EnumTypes.AdType;
 import br.edu.ufcg.computacao.si1.model.EnumTypes.TransactionType;
 
 import javax.persistence.*;
@@ -14,22 +15,21 @@ import java.util.Date;
 @Table(name="tb_ad")
 public class Ad {
 
-    private static final String[] types = new String[] {"movel", "imovel", "emprego"};
     private final static DateFormat DATE_FORMAT = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "title", nullable = false)       private String title;
-    @Column(name = "available", nullable = false)   private boolean available;
-    @Column(name = "post_date", nullable = false)   private Date postDate;
-    @Column(name = "price", nullable = false)       private double price;
-    @Column(name = "note")                          private Integer note;
-    @Column(name = "type", nullable = false)        private String type;
-    @Column(name = "idOwner")                       private Long idOwner;
-    @Column(name = "buyerId")                       private Long buyerId;
-    @Column(name = "owner")                         private String owner;
+    @Column(name = "title", nullable = false)                               private String title;
+    @Column(name = "available", nullable = false)                           private boolean available;
+    @Column(name = "post_date", nullable = false)                           private Date postDate;
+    @Column(name = "price", nullable = false)                               private double price;
+    @Column(name = "note")                                                  private Integer note;
+    @Column(name = "type", nullable = false)                                private String type;
+    @Column(name = "id_owner")                                              private Long idOwner;
+    @Column(name = "buyer_id")                                              private Long buyerId;
+    @Column(name = "owner")                                                 private String owner;
 
 
     public Ad(String title, double price, String type, Long idOwner, String owner) {
@@ -56,10 +56,6 @@ public class Ad {
     // -----------------------
     // ---> gets and sets <---
     // -----------------------
-
-    public static String[] getTypes() {
-        return types;
-    }
 
     public static DateFormat getDateFormat() {
         return DATE_FORMAT;

@@ -1,6 +1,7 @@
 package br.edu.ufcg.computacao.si1.service;
 
 import br.edu.ufcg.computacao.si1.model.Ad;
+import br.edu.ufcg.computacao.si1.model.EnumTypes.AdType;
 import br.edu.ufcg.computacao.si1.model.form.AdForm;
 import br.edu.ufcg.computacao.si1.repository.AdRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,8 @@ public class AdServiceImpl implements AdService {
 
     @Override
     public Ad create(AdForm adForm) {
+        if (adForm.getTitle().isEmpty() || adForm.getType().isEmpty() || adForm.getIdOwner() <= 0 || adForm.getIdOwner() <= 0)
+            return null;
         Ad ad = new Ad(adForm.getTitle(), adForm.getPrice(), adForm.getType(), adForm.getIdOwner(), adForm.getOwner());
         return adRepository.save(ad);
     }

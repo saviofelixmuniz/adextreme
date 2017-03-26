@@ -31,36 +31,40 @@ public class UserController {
     public ResponseEntity<Collection> getUsuarios() {
         Collection<User> users = usuarioService.getAll();
         Collections.sort((List) users, FactoryUserCompare.getComparator(UserComparatorEnum.AVERAGE_RATING));
-        return new ResponseEntity<Collection>(users, HttpStatus.OK);
+        return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/user/balance/{userID}", method = RequestMethod.GET)
     public ResponseEntity<Double> getUserBalance (@PathVariable Long userID) {
-        return new ResponseEntity<Double>(usuarioService.getById(userID).getCredit(), HttpStatus.OK);
+        User user = usuarioService.getById(userID);
+        if (user == null)
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<Double>(user.getCredit(), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/user/qualificate/{userToQualifyID}/{alertID}/{ratingValue}", method = RequestMethod.POST)
     public ResponseEntity qualificate(@PathVariable Long userToQualifyID, @PathVariable Long alertID, @PathVariable Integer ratingValue){
-        User resp = usuarioService.qualifyUserById(userToQualifyID,alertID , ratingValue);
-        if (resp == null)
+        User user = usuarioService.qualifyUserById(userToQualifyID,alertID , ratingValue);
+        if (user == null)
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
 
-        return new ResponseEntity(resp, HttpStatus.OK);
+        return new ResponseEntity(user, HttpStatus.OK);
     }
     @RequestMapping(value = "/user/single/{userID}", method = RequestMethod.GET)
+
     public ResponseEntity<User> getUser (@PathVariable Long userID) {
-        User response = usuarioService.getById(userID);
-        if (response == null)
-            return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
-        return new ResponseEntity<User>(response, HttpStatus.OK);
+        User user = usuarioService.getById(userID);
+        if (user == null)
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/user/qualificate/{userID}")
     public ResponseEntity getUserAvarageRatingValue(@PathVariable Long userID) {
-        User u = usuarioService.getById(userID);
-        if (u == null)
+        User user = usuarioService.getById(userID);
+        if (user == null)
             return new ResponseEntity(HttpStatus.NOT_FOUND);
-        return new ResponseEntity(u.calculateAverageRating(), HttpStatus.OK);
+        return new ResponseEntity(user.calculateAverageRating(), HttpStatus.OK);
     }
 
 }

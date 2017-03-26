@@ -29,32 +29,33 @@ public class LoginController {
     public ResponseEntity<LoginResponse> authenticate(@RequestBody LoginForm loginForm) {
 
         if (usuarioService.getByEmail(loginForm.getEmail()) == null)
-            return new ResponseEntity<LoginResponse>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
         if (loginForm.getEmail() == null || loginForm.getPassword() == null)
-            return new ResponseEntity<LoginResponse>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
         User user = usuarioService.getByEmail(loginForm.getEmail());
 
-        if (!user.getPassword().equals(loginForm.getPassword()))
-            return new ResponseEntity<LoginResponse>(HttpStatus.UNAUTHORIZED);
+        if (!user.password().equals(loginForm.getPassword()))
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 
         // generating token
+        long EXPIRATIONTIME = (10 * 60 * 1000);
         String token = Jwts.builder()
                 .setSubject(user.getEmail())
                 .signWith(SignatureAlgorithm.HS512, "adExtremeKey")
-                .setExpiration(new Date(System.currentTimeMillis() + 5 * 60 * 1000))
+                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATIONTIME))
                 .compact();
 
-        return new ResponseEntity<LoginResponse>(new LoginResponse(token, user), HttpStatus.OK);
+        return new ResponseEntity<>(new LoginResponse(token, user), HttpStatus.OK);
 
     }
+
 
     private class LoginResponse {
         String token;
         User user;
-
-        public LoginResponse(String token, User user){
+        LoginResponse(String token, User user){
             this.token = token;
             this.user = user;
         }
