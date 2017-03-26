@@ -46,7 +46,7 @@
                             <th scope="row">{{$index + 1}}</th>
                             <td>{{ad.title}}</td>
                             <td>{{ad.type}}</td>
-                            <td>{{ad.postDate}}</td>
+                            <td>{{ad.postDate | date:"dd/MM/yyyy 'às' HH:mma"}}</td>
                             <td>{{ad.price | currency : "R$"}}</td>
                             <td ng-style="{'color':getAdStatusStyle(ad)}"><b>{{getAdStatus(ad)}}</b></td>
                         </tr>

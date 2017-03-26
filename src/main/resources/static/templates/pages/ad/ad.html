@@ -16,12 +16,11 @@
 		<tr ng-repeat = "ad in ads" style="cursor: pointer" ng-click="openAdModal($index)">
 			<th scope="row">{{$index + 1}}</th>
 			<td>{{ad.title}}</td>
-			<td>{{ad.role}}</td>
-			<td>{{ad.postDate}}</td>
-			<td>{{ad.price}}</td>
+			<td>{{ad.type}}</td>
+			<td>{{ad.postDate | date:"dd/MM/yyyy 'às' HH:mma"}}</td>
+			<td>{{ad.price | currency : "R$"}}</td>
 			<td>{{ad.owner}}</td>
 		</tr>
 		</tbody>
 	</table>
-	<a class="btn btn-default" ng-click="clear()">Limpar</a>
 </div>

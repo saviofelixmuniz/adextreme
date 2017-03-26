@@ -1,6 +1,10 @@
 angular.module("adExtreme")
     .factory("Advertisement", function AdFactory($http, PROPERTIES) {
         return {
+            getSingle: function(adId) {
+                return $http.get(PROPERTIES.authenticatedRestPath + PROPERTIES.adPath + "/single/" + adId);
+            },
+
             handleTransaction : function (buyerId, adId) {
                 var params = {
                     buyerId : buyerId,

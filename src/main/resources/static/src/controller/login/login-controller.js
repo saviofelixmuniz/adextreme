@@ -35,6 +35,7 @@ angular.module('adExtreme')
 			function (response) {
 				localStorage.setItem("adExtremeUserToken", response.data.token);
 				$rootScope.currentUser = response.data.user;
+				console.log($rootScope.currentUser);
                 $rootScope.loggedIn = true;
 				$location.path("/user-home");
 		},

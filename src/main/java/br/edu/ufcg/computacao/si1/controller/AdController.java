@@ -2,8 +2,8 @@ package br.edu.ufcg.computacao.si1.controller;
 
 import br.edu.ufcg.computacao.si1.model.Ad;
 import br.edu.ufcg.computacao.si1.model.User;
-import br.edu.ufcg.computacao.si1.model.comparators.AdComparatorEnum;
-import br.edu.ufcg.computacao.si1.model.comparators.FactoryAdCompare;
+import br.edu.ufcg.computacao.si1.model.comparators.ads.AdComparatorEnum;
+import br.edu.ufcg.computacao.si1.model.comparators.ads.FactoryAdCompare;
 import br.edu.ufcg.computacao.si1.model.form.AdForm;
 import br.edu.ufcg.computacao.si1.model.form.PurchaseForm;
 import br.edu.ufcg.computacao.si1.service.AdServiceImpl;
@@ -27,6 +27,14 @@ public class AdController {
 
     @Autowired
     private UserServiceImpl usuarioService;
+
+    @RequestMapping(value = "/ads/single/{adID}", method = RequestMethod.GET)
+    public ResponseEntity<Ad> getAd (@PathVariable Long adID) {
+        Ad response = adService.getById(adID);
+        if (response == null)
+            return new ResponseEntity<Ad>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<Ad>(response, HttpStatus.OK);
+    }
 
     @RequestMapping(value = "/ads/all", method = RequestMethod.GET)
     public ResponseEntity<Collection> getAllAds(){

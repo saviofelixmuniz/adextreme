@@ -25,10 +25,9 @@ public class User {
     @Column(name = "rating_count")                          private Integer ratingCount;
     @Column(name = "average_rating")                       private Integer averageRating;
 
-
     @Column(name = "qualifications_alerts")
     @OneToMany(cascade = {CascadeType.ALL, CascadeType.REMOVE}, orphanRemoval = true)
-    private List<QualificationAlert> qualificationsAlerts;
+    private List<QualificationAlert> qualificationAlerts;
 
 
     public User() {}
@@ -41,7 +40,7 @@ public class User {
         this.credit = new Double(0);
         this.ratingSum = new Integer(0);
         this.ratingCount = new Integer(0);
-        this.qualificationsAlerts = new LinkedList<>();
+        this.qualificationAlerts = new LinkedList<>();
         this.averageRating = 0;
     }
 
@@ -113,12 +112,18 @@ public class User {
         this.ratingCount = ratingCount;
     }
 
-    public List<QualificationAlert> getQualificationsAlerts() {
-        return qualificationsAlerts;
+    public List<QualificationAlert> getqualificationAlerts() {
+        List<QualificationAlert> alertsNotQualified = new LinkedList<>();
+        for (QualificationAlert alert:
+             qualificationAlerts) {
+            if(!alert.isQualified())
+                alertsNotQualified.add(alert);
+        }
+        return alertsNotQualified;
     }
 
-    public void setQualificationsAlerts(List<QualificationAlert> qualificationsAlerts) {
-        this.qualificationsAlerts = qualificationsAlerts;
+    public void setqualificationAlerts(List<QualificationAlert> qualificationAlerts) {
+        this.qualificationAlerts = qualificationAlerts;
     }
     public Integer getAvarageRating() {
         return averageRating;
@@ -158,13 +163,13 @@ public class User {
     public boolean addQualificationAlert(QualificationAlert alert) {
         if (alert == null)
             return false;
-        return qualificationsAlerts.add(alert);
+        return qualificationAlerts.add(alert);
     }
 
     public void setAlertQualificatedById(Long alertId) {
-        for (int i=0; i< qualificationsAlerts.size(); i++){
-            if (qualificationsAlerts.get(i).getId() == alertId) {
-                qualificationsAlerts.get(i).setQualified(true);
+        for (int i=0; i< qualificationAlerts.size(); i++){
+            if (qualificationAlerts.get(i).getId() == alertId) {
+                qualificationAlerts.get(i).setQualified(true);
                 break;
             }
         }

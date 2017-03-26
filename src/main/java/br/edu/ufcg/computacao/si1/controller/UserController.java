@@ -1,6 +1,10 @@
 package br.edu.ufcg.computacao.si1.controller;
 
+import br.edu.ufcg.computacao.si1.model.Ad;
 import br.edu.ufcg.computacao.si1.model.User;
+import br.edu.ufcg.computacao.si1.model.comparators.ads.FactoryAdCompare;
+import br.edu.ufcg.computacao.si1.model.comparators.users.FactoryUserCompare;
+import br.edu.ufcg.computacao.si1.model.comparators.users.UserComparatorEnum;
 import br.edu.ufcg.computacao.si1.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by nicacio on 13/03/17.
@@ -23,7 +29,9 @@ public class UserController {
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public ResponseEntity<Collection> getUsuarios() {
-        return new ResponseEntity<Collection>(usuarioService.getAll(), HttpStatus.OK);
+        Collection<User> users = usuarioService.getAll();
+        Collections.sort((List) users, FactoryUserCompare.getComparator(UserComparatorEnum.AVERAGE_RATING));
+        return new ResponseEntity<Collection>(users, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/user/balance/{userID}", method = RequestMethod.GET)
@@ -38,6 +46,13 @@ public class UserController {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
 
         return new ResponseEntity(resp, HttpStatus.OK);
+    }
+    @RequestMapping(value = "/user/single/{userID}", method = RequestMethod.GET)
+    public ResponseEntity<User> getUser (@PathVariable Long userID) {
+        User response = usuarioService.getById(userID);
+        if (response == null)
+            return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<User>(response, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/user/qualificate/{userID}")

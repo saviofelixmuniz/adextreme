@@ -1,7 +1,7 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header"">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="/#!/home">
                 <span class="glyphicon glyphicon-usd" aria-hidden="true"></span>
                 ad-extreme
             </a>
@@ -30,7 +30,21 @@
                         Minha conta
                     </a>
                 </li>
-                <li class="dropdown" uib-dropdown is-open="status.isopen">
+                <li class="dropdown" uib-dropdown is-open="alertStatus.isopen">
+                      <a uib-dropdown-toggle ng-disabled="disabled" style="cursor: pointer">
+                          <span class="glyphicon glyphicon-bell" aria-hidden="true"></span>
+                          <span class="badge small">{{$root.currentUser.qualificationAlerts.length}}</span>
+                      </a>
+                      <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+                        <li role="menuitem" ng-repeat="alert in alertMessages">
+                            <a ng-click="rate(alert)" style="cursor: pointer">
+                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                {{alert.message}}
+                            </a>
+                        </li>
+                      </ul>
+                </li>
+                <li class="dropdown" uib-dropdown is-open="adStatus.isopen">
                       <a uib-dropdown-toggle ng-disabled="disabled" style="cursor: pointer">
                           Anúncios
                           <span class="caret">
@@ -40,6 +54,12 @@
                         <li class="divider"></li>
                         <li role="menuitem"><a href="/#!/ad-register">Cadastrar anúncio</a></li>
                       </ul>
+                </li>
+                <li>
+                    <a href="/#!/ranking">
+                        <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
+                        Ranking de usuários
+                    </a>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">

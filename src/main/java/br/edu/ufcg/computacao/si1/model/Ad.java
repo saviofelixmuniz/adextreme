@@ -198,7 +198,7 @@ public class Ad {
             vendor.creditBalance(this.price);
             vendor.addQualificationAlert(new QualificationAlert(buyer.getId(), this.id, TransactionType.VENDA, false));
             buyer.debitBalance(this.price);
-            buyer.addQualificationAlert(new QualificationAlert(buyer.getId(), this.id, TransactionType.COMPRA, false));
+            buyer.addQualificationAlert(new QualificationAlert(vendor.getId(), this.id, TransactionType.COMPRA, false));
         }
     }
 

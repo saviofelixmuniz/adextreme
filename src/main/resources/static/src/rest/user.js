@@ -1,8 +1,20 @@
 angular.module("adExtreme")
 .factory("User", function UserFactory($http,PROPERTIES, $location, $rootScope) {
 	return {
+        getAll : function () {
+            return $http.get(PROPERTIES.userPath);
+        },
+
+        getSingle : function (userId) {
+            return $http.get(PROPERTIES.authenticatedRestPath + "/single/" + userId);
+        },
+
         getBalance : function (userId) {
             return $http.get(PROPERTIES.authenticatedRestPath + "/balance/" + userId);
+        },
+
+        rate : function (userId, alertId, ratingValue) {
+            return $http.post(PROPERTIES.authenticatedRestPath + "/qualificate/" + userId + "/" + alertId + "/" + ratingValue);
         },
 
         register : function (name, email, password, role) {
