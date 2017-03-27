@@ -3,7 +3,6 @@ package br.edu.ufcg.computacao.si1.service;
 import br.edu.ufcg.computacao.si1.model.User;
 import br.edu.ufcg.computacao.si1.model.form.UserForm;
 import java.util.Collection;
-import java.util.Optional;
 
 /**
  * Created by Marcus Oliveira on 28/12/16.
@@ -28,5 +27,5 @@ public interface UserService {
 
     boolean delete(Long id);
 
-    User qualifyUserById(Long idUserToQualify,Long alertId, Integer ratingValue);
+    User qualifyUserById(Long idUserToQualify, Long alertId, Integer ratingValue, Long qualifierID);
 }

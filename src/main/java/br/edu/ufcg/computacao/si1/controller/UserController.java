@@ -42,13 +42,15 @@ public class UserController {
         return new ResponseEntity<Double>(user.getCredit(), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/user/qualificate/{userToQualifyID}/{alertID}/{ratingValue}", method = RequestMethod.POST)
-    public ResponseEntity qualificate(@PathVariable Long userToQualifyID, @PathVariable Long alertID, @PathVariable Integer ratingValue){
-        User user = usuarioService.qualifyUserById(userToQualifyID,alertID , ratingValue);
-        if (user == null)
+    @RequestMapping(value = "/user/qualificate/{userToQualifyID}/{alertID}/{ratingValue}/{qualifierID}", method = RequestMethod.POST)
+    public ResponseEntity qualificate(@PathVariable Long userToQualifyID, @PathVariable Long alertID, @PathVariable Integer ratingValue, @PathVariable Long qualifierID){
+        User userQualified = usuarioService.qualifyUserById(userToQualifyID,alertID , ratingValue, qualifierID);
+
+        if (userQualified == null)
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
 
-        return new ResponseEntity(user, HttpStatus.OK);
+        User qualifier = usuarioService.getById(qualifierID);
+        return new ResponseEntity(qualifier, HttpStatus.OK);
     }
     @RequestMapping(value = "/user/single/{userID}", method = RequestMethod.GET)
 

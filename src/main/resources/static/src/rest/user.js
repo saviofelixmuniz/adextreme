@@ -13,8 +13,8 @@ angular.module("adExtreme")
             return $http.get(PROPERTIES.authenticatedRestPath + "/balance/" + userId);
         },
 
-        rate : function (userId, alertId, ratingValue) {
-            return $http.post(PROPERTIES.authenticatedRestPath + "/qualificate/" + userId + "/" + alertId + "/" + ratingValue);
+        rate : function (userId, alertId, ratingValue,qualifierId) {
+            return $http.post(PROPERTIES.authenticatedRestPath + "/qualificate/" + userId + "/" + alertId + "/" + ratingValue + "/" + qualifierId);
         },
 
         register : function (name, email, password, role) {

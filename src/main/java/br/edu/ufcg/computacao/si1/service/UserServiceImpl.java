@@ -81,12 +81,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User qualifyUserById(Long idUserToQualify,Long alertId, Integer ratingValue) {
+        public User qualifyUserById(Long idUserToQualify, Long alertId, Integer ratingValue, Long qualifierID) {
         //int resp = userRepository.updateRating(idUserToQualify, (ratingValue+ratingSum));
         User u = userRepository.findOne(idUserToQualify);
         if (u != null) {
             u.sumRating(ratingValue);
-            u.setAlertQualificatedById(alertId);
+            this.update(u);
+        }
+        User qualifier = userRepository.findOne(qualifierID);
+        if (qualifier != null) {
+            qualifier.setAlertQualificatedById(alertId);
             this.update(u);
         }
         return u;

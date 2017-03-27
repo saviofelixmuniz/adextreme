@@ -42,7 +42,7 @@ public class AdController {
 
     @RequestMapping(value = "/ads/all", method = RequestMethod.GET)
     public ResponseEntity<Collection> getAllAds(){
-        Collection<Ad> anun = adService.getAll();
+        Collection<Ad> anun = adService.getByAvailable();
         return new ResponseEntity<>(anun, HttpStatus.OK);
     }
 

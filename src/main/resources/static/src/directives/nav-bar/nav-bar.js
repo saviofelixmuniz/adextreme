@@ -7,11 +7,16 @@
 			user: '='
 		},
 		templateUrl: '/templates/directives/nav-bar/nav-bar.html',
-		controller: function ($element, $scope, $rootScope, Advertisement, User, $uibModal) {
+		controller: function ($element, $scope, $rootScope, $location, Advertisement, User, $uibModal) {
 			$scope.alertMessages = [];
 
-			$scope.log = function (coisa) {
-			}
+		    $scope.logout = function () {
+		        User.logout();
+		        localStorage.clear();
+		        $rootScope.currentUser = {};
+		        $rootScope.loggedIn = false;
+		        $location.path('/login');
+		    }
 
 			function pushAlertMessage(alert) {
 				var alertId = alert.id;
@@ -64,12 +69,16 @@
 		          	}
 		          }
 		        });
+
+		        modalInstance.result.then( deleteAlert(alert));
 			}
 
 			$scope.$watch('$root.currentUser', function(user) {
 				if (Object.keys(user).length != 0) {
 					$scope.alerts = user.qualificationAlerts;
 
+					$scope.alertMessages = [];
+					
 					$scope.alerts.forEach(function (alert) {
 						pushAlertMessage(alert);
 					});
