@@ -42,6 +42,9 @@ public class AdController {
 
     @RequestMapping(value = "/ads/all", method = RequestMethod.GET)
     public ResponseEntity<Collection> getAllAds(){
+        /*
+            This method returns only the ads that are available.
+         */
         Collection<Ad> anun = adService.getByAvailable();
         return new ResponseEntity<>(anun, HttpStatus.OK);
     }

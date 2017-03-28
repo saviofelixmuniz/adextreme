@@ -13,7 +13,7 @@
                 </div>
                 <div class="panel-body y-scroll">
                     <div class="list-group">
-                        <a ng-repeat="transaction in current.transactions" href="#" class="list-group-item" ng-style="{'color': getTransactionColor(transaction)}">
+                        <a ng-repeat="transaction in current.transactions" href="" class="list-group-item" ng-style="{'color': getTransactionColor(transaction)}">
                             {{transaction.title}}
                             <p style="float: right">{{getTransactionSign(transaction)}} {{transaction.price | currency : "R$"}}</p>
                         </a>

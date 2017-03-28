@@ -17,7 +17,7 @@ angular.module('adExtreme')
 	$scope.getTooltip = function () {
 		return 'Você precisa ser pessoa jurídica para cadastrar este tipo de anúncio';
 		//return $rootScope.currentUser.role == 'FISICA'? 'Você precisa ser pessoa jurídica para cadastrar este tipo de anúncio' : null;
-	}
+	};
 
 	$scope.clear = function (form) {
 		form.$setUntouched();
@@ -32,7 +32,8 @@ angular.module('adExtreme')
 		ad.idOwner = $rootScope.currentUser.id;
         Advertisement.register(ad.title, ad.price, ad.type, ad.idOwner, $rootScope.currentUser.name)
             .then(function (response) {
-            	$location.path("/ad");
+            	//$location.path("/ad");
+                $successBox("Sucesso", "Anúncio cadastrado.");
             }, function (response) {
 				$defaultCommunicationError();
             });

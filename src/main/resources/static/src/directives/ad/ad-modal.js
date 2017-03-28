@@ -4,7 +4,6 @@ angular.module("adExtreme")
 	$scope.currentAd.contact = "(83) 98181-5678";
 
 	$scope.cancel = function() {
-		console.log($scope.currentAd);
 		$uibModalInstance.dismiss();
 	}
 

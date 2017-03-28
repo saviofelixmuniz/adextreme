@@ -4,7 +4,7 @@ angular.module('adExtreme')
 
 	$scope.cancel = function() {
 		$uibModalInstance.dismiss();
-	}
+	};
 
 	$scope.submit = function() {
 		User.rate(alert.userQualifiedId, alert.id, $scope.rating, $rootScope.currentUser.id)

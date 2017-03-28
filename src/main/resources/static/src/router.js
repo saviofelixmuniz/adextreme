@@ -55,8 +55,6 @@ angular.module('adExtreme')
 .run(function($rootScope, $location) {
     $rootScope.$on("$routeChangeStart", function(event, next, current) {
 	    if (!$rootScope.loggedIn) {
-    		console.log("routeChanged");
-    		console.log(next);
 	        if ($.inArray(next.templateUrl, FREE_PAGES) == -1) {
 	            $location.path("/login");
 	        }
