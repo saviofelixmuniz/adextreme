@@ -1,5 +1,8 @@
 package br.edu.ufcg.computacao.si1.model;
 
+import br.edu.ufcg.computacao.si1.model.EnumTypes.AdType;
+import br.edu.ufcg.computacao.si1.model.EnumTypes.TransactionType;
+
 import javax.persistence.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -12,65 +15,57 @@ import java.util.Date;
 @Table(name="tb_ad")
 public class Ad {
 
-    private static final String[] types = new String[] {"movel", "imovel", "emprego"};
     private final static DateFormat DATE_FORMAT = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    @Column(name = "id", nullable = false, unique = true)
     private Long id;
 
-    @Column(name = "title", nullable = false)
-    private String title;
+    @Column(name = "title", nullable = false)                               private String title;
+    @Column(name = "available", nullable = false)                           private boolean available;
+    @Column(name = "post_date", nullable = false)                           private Date postDate;
+    @Column(name = "price", nullable = false)                               private double price;
+    @Column(name = "note")                                                  private Integer note;
+    @Column(name = "type", nullable = false)                                private String type;
+    @Column(name = "id_owner")                                              private Long idOwner;
+    @Column(name = "buyer_id")                                              private Long buyerId;
+    @Column(name = "owner")                                                 private String owner;
 
-    @Column(name = "post_date", nullable = false)
-    private Date postDate;
-
-    @Column(name = "price", nullable = false)
-    private double price;
-
-    @Column(name = "note")
-    private String note;
-
-    @Column(name = "type", nullable = false)
-    private String type;
-
-    @Column(name = "idOwner")
-    private Long idOwner;
-
-    @Column(name = "owner")
-    private String owner;
 
     public Ad(String title, double price, String type, Long idOwner, String owner) {
         this.title = title;
         this.postDate = new Date();
         this.price = price;
-        this.note = "";
+        this.note = 0;
         this.type = type;
         this.idOwner = idOwner;
         this.owner = owner;
+        this.buyerId = null;
+        this.available = true;
     }
 
     public Ad() {
-        title = "";
-        postDate = new Date();
-        price = 0;
-        note = "";
-        type = "";
+        this.title = "";
+        this.postDate = new Date();
+        this.price = 0;
+        this.note = 0;
+        this.type = "";
+        this.buyerId = null;
     }
 
-    /**
-     * Retorna o id do anuncio
-     * @return o id do anuncio
-     */
+    // -----------------------
+    // ---> gets and sets <---
+    // -----------------------
+
+    public static DateFormat getDateFormat() {
+        return DATE_FORMAT;
+    }
+
     public Long getId() {
         return id;
     }
 
-    /**
-     * Modifica o id do anuncio
-     * @param id id a ser colocado no anuncio
-     */public void setId(Long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -82,11 +77,17 @@ public class Ad {
         this.title = title;
     }
 
-    public String getPostDate() {
-        return DATE_FORMAT.format(postDate);
+    public boolean isAvailable() {
+        return available;
     }
 
-    public Date getDate() { return this.postDate;}
+    public void setAvailable(boolean available) {
+        this.available = available;
+    }
+
+    public Date getPostDate() {
+        return postDate;
+    }
 
     public void setPostDate(Date postDate) {
         this.postDate = postDate;
@@ -100,11 +101,11 @@ public class Ad {
         this.price = price;
     }
 
-    public String getNote() {
+    public Integer getNote() {
         return note;
     }
 
-    public void setNote(String note) {
+    public void setNote(Integer note) {
         this.note = note;
     }
 
@@ -122,6 +123,14 @@ public class Ad {
 
     public void setIdOwner(Long idOwner) {
         this.idOwner = idOwner;
+    }
+
+    public Long getBuyerId() {
+        return buyerId;
+    }
+
+    public void setBuyerId(Long buyerId) {
+        this.buyerId = buyerId;
     }
 
     public String getOwner() {
@@ -174,14 +183,19 @@ public class Ad {
                 '}';
     }
 
-    public User[] toSell(User vendor, User buyer) {
-         vendor.sell(this.price);
-         vendor.addSellerTransaction(this);
-         buyer.purchase(this.price);
-         buyer.addBuyerTransaction(this);
 
-         User[] users = {vendor, buyer};
-         return users;
+    // -----------------
+    // ---> methods <---
+    // -----------------
 
+
+    public void handleTransaction(User vendor, User buyer) {
+        if (vendor != null && buyer != null) {
+            vendor.creditBalance(this.price);
+            vendor.addQualificationAlert(new QualificationAlert(buyer.getId(), this.id, TransactionType.VENDA, false));
+            buyer.debitBalance(this.price);
+            buyer.addQualificationAlert(new QualificationAlert(vendor.getId(), this.id, TransactionType.COMPRA, false));
+        }
     }
+
 }

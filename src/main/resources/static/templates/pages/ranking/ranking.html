@@ -1,0 +1,42 @@
+<div class="center-align" ng-init="loadUsers()">
+	<h2 style="padding-bottom: 10px;">Ranking de usuários</h2>
+	<div class='row'>
+	  	<div class="col-xs-4">
+	  		<input type="text" class="form-control input-sm" placeholder="Buscar usuário" aria-describedby="sizing-addon2" ng-model = "search">
+	  	</div>
+		
+		<div class="dropdown col-xs-5">
+		  <button class="btn btn-default btn-sm dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+		    Ordenar por:
+		    <span class="caret"></span>
+		  </button>
+		  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+		    <li><a ng-click="sortBy('averageRating')">Nota média</a></li>
+		    <li><a ng-click="sortBy('ratingCount')">Número de avaliações</a></li>
+		  </ul>
+		</div>		
+	</div>
+	
+	<br/>
+	<table class="table table-striped">
+		<thead class="thead-inverse">
+			<tr>
+				<th>Posição</th>
+				<th>Usuário</th>
+				<th>Avaliação</th>
+				<th>Número de avaliações</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat = "user in users | orderBy: sortOption: reverse | filter:search">
+				<th scope="row" style="text-align: center">{{$index + 1}}º</th>
+				<td>{{user.name}}</td>
+				<td>
+					<jk-rating-stars max-rating="5" rating="user.averageRating" read-only="true">
+					</jk-rating-stars>
+				</td>
+				<td>{{user.ratingCount}}</td>
+			</tr>
+		</tbody>
+	</table>	
+</div>

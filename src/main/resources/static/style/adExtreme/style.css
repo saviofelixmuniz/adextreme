@@ -11,6 +11,10 @@
 	color: #BDAAAA;
 }
 
+.modal-row {
+	margin-left: 20px;
+}
+
 .custom-jumbo {
 	width: 85%;
 	margin: 0 auto;
@@ -27,6 +31,40 @@
 	width: 50%;
 }
 
+.negative-balance {
+	background-color: #D9534F;
+	color: white;
+	margin-left: 80px; 
+	margin-top: 40px;
+	height: 120px
+}
+
+.positive-balance {
+	background-color: #5cb85c;
+	color: white;
+	margin-left: 80px; 
+	margin-top: 40px;
+	height: 120px
+}
+
+.y-scroll {
+	overflow: auto;
+	overflow-x: hidden;
+}
+
+#transactionPagination {
+    position: absolute;
+    bottom: 5vh;
+    margin-left: 15vh;
+    text-align: center;	
+}
+
+#adPagination {
+	position: absolute;
+	bottom: 3vh;
+	margin-left: 45vh;
+}
+
 #registerForm {
 	margin: 0 auto;
 	width: 80%;
@@ -38,6 +76,18 @@
 	height: 75vh;
 	overflow: auto;
 	overflow-x: hidden;
+}
+
+#transactionsPanel {
+	margin-left: 80px;
+	height: 47.3vh;
+}
+
+#userAdPanel {
+	margin-left: 40px; 
+	margin-top: 40px; 
+	margin-right: 40px; 
+	height: 68.5vh
 }
 
 #priceInput {

@@ -11,11 +11,24 @@ import java.util.Optional;
  */
 public interface AdService {
 
-    Ad create(AdForm anuncio);
+    /**
+     * Create an announcement in system
+     * @param adForm formulary in "model/form/AdForm"
+     * @return Ad Object
+     */
+    Ad create(AdForm adForm);
 
-    Optional<Ad> getById(Long id);
+    Ad getById(Long id);
 
-    Collection<Ad> get(String tipo);
+    Collection<Ad> getAdByUserId(Long id);
+
+    Collection<Ad> getAdByBuyerId(Long id);
+
+    Collection<Ad> getTransactions(Long id, Boolean available);
+
+    Collection<Ad> getByAvailable();
+
+    Collection<Ad> getByType(String type);
 
     Collection<Ad> getAll();
 

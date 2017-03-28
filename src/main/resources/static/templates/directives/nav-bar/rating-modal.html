@@ -1,0 +1,13 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="cancel()">&times;</button>
+    <h3 class="modal-title" id="modal-title"><span class="glyphicon glyphicon-star-empty"></span>Qualifique!</h3>
+</div>
+<p style="margin: 20px">Como você qualifica sua {{alert.transaction}} com {{alert.userQualifiedName}}?</p>
+<div style="margin-left: 40px; margin-bottom: 10px">
+	<jk-rating-stars max-rating="5" rating="rating">
+	</jk-rating-stars>	
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="submit()">Confirmar</button>
+    <button class="btn btn-default" type="button" ng-click="cancel()">Cancelar</button>
+</div>

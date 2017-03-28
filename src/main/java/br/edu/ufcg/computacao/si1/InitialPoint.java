@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Bean;
 public class InitialPoint {
 
 	@Bean
-	public FilterRegistrationBean getFiltroJwt() {
+	public FilterRegistrationBean getJwtFilter() {
 		FilterRegistrationBean frb = new FilterRegistrationBean();
 		frb.setFilter(new JwtTokenFilter());
 		frb.addUrlPatterns("/user/*");

@@ -1,8 +1,9 @@
 package br.edu.ufcg.computacao.si1.model;
 
+import br.edu.ufcg.computacao.si1.model.EnumTypes.PersonType;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -14,35 +15,38 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column
-    private String name;
-    @Column(unique = true)
-    private String email;
-    @Column
-    private String password;
-    @Column
-    private String role;
-    @Column
-    @NotNull
-    private Double credit;
-    @Column
+
+    @Column(unique = true)                                  private String email;
+    @Column(name = "name")                                  private String name;
+    @Column(name = "password")                              private String password;
+    @Column(name = "role") @Enumerated(EnumType.STRING)     private PersonType role;
+    @Column(name = "credit")@NotNull                        private Double credit;
+    @Column(name = "rating_sum")                            private Integer ratingSum;
+    @Column(name = "rating_count")                          private Integer ratingCount;
+    @Column(name = "average_rating")                        private Integer averageRating;
+
+    @Column(name = "qualifications_alerts")
     @OneToMany(cascade = {CascadeType.ALL, CascadeType.REMOVE}, orphanRemoval = true)
-    private List<Transaction> transactions;
+    private List<QualificationAlert> qualificationAlerts;
 
 
-    public User() {
+    public User() {}
 
-    }
-
-    public User(String name, String email, String password, String role) {
-
+    public User(String name, String email, String password, PersonType role) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.role = role;
         this.credit = new Double(0);
-        this.transactions = new LinkedList<>();
+        this.ratingSum = new Integer(0);
+        this.ratingCount = new Integer(0);
+        this.qualificationAlerts = new LinkedList<>();
+        this.averageRating = 0;
     }
+
+    // -----------------------
+    // ---> gets and sets <---
+    // -----------------------
 
     public Long getId() {
         return id;
@@ -68,7 +72,9 @@ public class User {
         this.email = email;
     }
 
-    public String getPassword() {
+    // O get do password foi removido por converção para que não seja retornado quando o spring retornar o objeto
+    // É apenas uma seguranaça a mais ja que a forma de autenticação é simples.
+    public String password() {
         return password;
     }
 
@@ -76,11 +82,11 @@ public class User {
         this.password = password;
     }
 
-    public String getRole() {
+    public PersonType getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(PersonType role) {
         this.role = role;
     }
 
@@ -92,31 +98,82 @@ public class User {
         this.credit = credit;
     }
 
-    public Collection<Transaction> getTransactions() {
-        return this.transactions;
+    public Integer getRatingSum() {
+        return ratingSum;
     }
 
-    public void setTransactions(List<Transaction> transactions) {
-        this.transactions = transactions;
+    public void setRatingSum(Integer ratingSum) {
+        this.ratingSum = ratingSum;
     }
 
-    public void addBuyerTransaction(Ad ad) {
-        // transação de compra
-        this.transactions.add(new Transaction(ad.getTitle(), ad.getDate(), ad.getPrice(),
-                                                ad.getNote(), ad.getType(), ad.getOwner(), "Purchase"));
+    public Integer getRatingCount() {
+        return ratingCount;
     }
 
-    public void addSellerTransaction(Ad ad){
-        // transação de venda
-        this.transactions.add(new Transaction(ad.getTitle(), ad.getDate(),
-                                            ad.getPrice(), ad.getNote(), ad.getType(), ad.getOwner(), "Venda"));
+    public void setRatingCount(Integer ratingCount) {
+        this.ratingCount = ratingCount;
     }
 
-    public void sell(Double price) {
-        credit += price;
+    public List<QualificationAlert> getqualificationAlerts() {
+        List<QualificationAlert> alertsNotQualified = new LinkedList<>();
+        for (QualificationAlert alert:
+             qualificationAlerts) {
+            if(!alert.isQualified())
+                alertsNotQualified.add(alert);
+        }
+        return alertsNotQualified;
     }
 
-    public void purchase(Double price) {
-        credit -= price;
+    public void setqualificationAlerts(List<QualificationAlert> qualificationAlerts) {
+        this.qualificationAlerts = qualificationAlerts;
+    }
+    public Integer getAvarageRating() {
+        return averageRating;
+    }
+
+    public void setAvarageRating(Integer averageRating) {
+        this.averageRating = averageRating;
+    }
+
+
+    // -----------------
+    // ---> methods <---
+    // -----------------
+
+
+    public void creditBalance(Double price) {credit += price;}
+
+    public void debitBalance(Double price) {credit -= price;}
+
+    public void sumRating(Integer ratingValue) {
+        if (ratingValue > 5)
+            this.ratingSum += 5;
+        if (ratingValue > 0 && ratingValue <= 5)
+            this.ratingSum += ratingValue;
+
+        this.ratingCount++;
+        this.averageRating = calculateAverageRating();
+    }
+
+    public Integer calculateAverageRating(){
+        if (ratingCount > 0)
+            return ratingSum/ratingCount;
+
+        return ratingSum;
+    }
+
+    public boolean addQualificationAlert(QualificationAlert alert) {
+        if (alert == null)
+            return false;
+        return qualificationAlerts.add(alert);
+    }
+
+    public void setAlertQualificatedById(Long alertId) {
+        for (int i=0; i< qualificationAlerts.size(); i++){
+            if (qualificationAlerts.get(i).getId() == alertId) {
+                qualificationAlerts.get(i).setQualified(true);
+                break;
+            }
+        }
     }
 }

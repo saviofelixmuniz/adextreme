@@ -3,7 +3,6 @@ package br.edu.ufcg.computacao.si1.model.form;
 
 public class AdForm {
 
-    private static final String[] types = new String[] {"movel", "imovel", "emprego"};
 
     private String title;
     private Double price;
@@ -33,10 +32,6 @@ public class AdForm {
 
     public void setType(String type) {
         this.type = type;
-    }
-
-    public static String[] getTypes() {
-        return types;
     }
 
     public Long getIdOwner() {

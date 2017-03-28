@@ -16,6 +16,7 @@ import java.io.IOException;
  * Created by nicacio on 14/03/17.
  */
 public class JwtTokenFilter extends GenericFilterBean {
+
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws ServletException, IOException {
         HttpServletRequest srq = (HttpServletRequest) request;
@@ -28,7 +29,7 @@ public class JwtTokenFilter extends GenericFilterBean {
 
         String token = header.substring(7); //cut Bearer
 
-        //VERIFICANDO TOKEN
+        //TOKEN VERIFY
         try {
             Jwts.parser().setSigningKey("adExtremeKey").parseClaimsJws(token).getBody();
             chain.doFilter(request, response);

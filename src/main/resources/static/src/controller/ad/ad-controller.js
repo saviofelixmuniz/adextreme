@@ -1,5 +1,5 @@
 angular.module('adExtreme')
-.controller('AdCtrl', function ($scope, Advertisement) {
+.controller('AdCtrl', function ($scope, Advertisement, $uibModal) {
     $scope.ads = [{title : 'Casa',
         role : 'Imóvel',
         postDate : '12-mar-2017 12:16:08',
@@ -16,9 +16,27 @@ angular.module('adExtreme')
         Advertisement.getAll().
         then (function success (ads) {
             $scope.ads = ads.data;
-            console.log("Novos anuncios cadastrados: " + ads.data);
         }, function error (error) {
-            $defaultCommunicationError();
+            $defaultError();
+        });
+    }
+
+    $scope.openAdModal = function(index) {
+        $scope.currentAd = $scope.ads[index];
+        var parent = this;
+
+        var modalInstance = $uibModal.open({
+          animation: true,
+          ariaLabelledBy: 'modal-title',
+          ariaDescribedBy: 'modal-body',
+          templateUrl: '/templates/directives/ad/ad-modal.html',
+          controller: 'AdModalCtrl',
+          scope: this,
+          controllerAs: '$ctrl'
+        });
+
+        modalInstance.result.then(function (confirmationMail) {
+
         });
     }
 

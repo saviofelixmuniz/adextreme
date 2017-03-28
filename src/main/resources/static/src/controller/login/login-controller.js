@@ -1,16 +1,15 @@
 angular.module('adExtreme')
 .controller('LoginCtrl', function ($scope, User, $location, $rootScope, PROPERTIES) {
 	$scope.alerts = [];
-	$scope.remember = false;
 
 	$scope.login = function () {
 		verifyEmptyInput();
 		validateUser($scope.email,$scope.password);
-	}
+	};
 
 	$scope.closeAlert = function (index) {
 		$scope.alerts.splice(index,1);
-	}
+	};
 
 	function verifyEmptyInput () {
 		if (!$scope.email && !$scope.password) {
@@ -36,9 +35,7 @@ angular.module('adExtreme')
 				localStorage.setItem("adExtremeUserToken", response.data.token);
 				$rootScope.currentUser = response.data.user;
                 $rootScope.loggedIn = true;
-                console.log($rootScope.currentUser);
-				console.log("Usuario Logado: " + $rootScope.currentUser.name);
-				$location.path("/ad");
+				$location.path("/user-home");
 		},
 			function (response) {
 				if (response.status == 404) addAlert("Usuário não encontrado.");

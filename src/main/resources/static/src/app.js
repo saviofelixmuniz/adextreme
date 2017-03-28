@@ -1,1 +1,1 @@
-angular.module('adExtreme',['ui.bootstrap','ngRoute','ngMessages']);
+angular.module('adExtreme',['ui.bootstrap','ngRoute','ngMessages','jkAngularRatingStars']);

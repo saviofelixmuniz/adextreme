@@ -10,6 +10,8 @@
 	<link rel="stylesheet" href="bower_components/sandstone_theme/bootstrap.css">
 	<link rel="stylesheet" href="bower_components/bootbox.js/style.css">
 	<link rel="stylesheet" href="style/adExtreme/style.css">
+	<link rel="stylesheet" href="bower_components/angular-jk-rating-stars/dist/jk-rating-stars.css" type="text/css" />
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 	<!-- LIB SCRIPTS IMPORT -->
 	<script src="bower_components/jquery/dist/jquery.js"></script>	
@@ -19,13 +21,17 @@
 	<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 	<script src="bower_components/angular-messages/angular-messages.js"></script>
 	<script src="bower_components/bootbox.js/bootbox.js"></script>
+	<script src="bower_components/blockUI/jquery.blockUI.js"></script>	
+	<script src="bower_components/spinjs/spin.js"></script>
+	<script src="bower_components/angular-jk-rating-stars/dist/jk-rating-stars.js"></script>
 	
 	<!-- SCRIPTS IMPORT -->
 	<script src="src/app.js"></script>
 	<script src="src/router.js"></script>
 	<script src="src/util/message-box.js"></script>
 	<script src="src/util/properties.js"></script>
-	
+	<script src="src/util/masker.js"></script>
+
 	<script src="src/controller/ad/ad-controller.js"></script>
 	<script src="src/controller/ad-register/ad-register-controller.js"></script>
 	<script src="src/controller/home/home-controller.js"></script>
@@ -33,16 +39,21 @@
 	<script src="src/controller/register/register-controller.js"></script>
 	<script src="src/interceptor/interceptor.js"></script>
 	<script src="src/controller/user-home/user-home.js"></script>
+	<script src="src/controller/ranking/ranking-controller.js"></script>	
 
 	<!-- REST IMPORT -->
 	<script src="src/rest/user.js"></script>
-	<script src="src/rest/adversement.js"></script>
 
-	<script src="src/directives/common/nav-bar.js"></script>
+	<script src="src/rest/ad.js"></script>
+
+	<script src="src/directives/nav-bar/nav-bar.js"></script>
 	<script src="src/directives/common/error-message.js"></script>
+	<script src="src/directives/ad/ad-modal.js"></script>
+	<script src="src/directives/nav-bar/rating-modal.js"></script>
 
 </head>
 <body ng-app="adExtreme" ng-controller="homeController">
+	<div id="spinner"></div>
 	<nav-bar logged-in="loggedIn" user="user"></nav-bar>
 	<div ng-view></div>
 
