@@ -76,11 +76,6 @@
 			<scope>test</scope>
 		</dependency>
 
-        <dependency>
-            <groupId>br.edu.ufcg.computacao.si1</groupId>
-            <artifactId>ad-extreme</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
     </dependencies>
 
 	<build>
